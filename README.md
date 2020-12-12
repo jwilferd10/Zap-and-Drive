@@ -1,9 +1,9 @@
 # ZapDrive
 
-## Zap & Drive is a website that list all the EV charging locations accrossed United States.
+## Zap & Drive is a website that list the EV charging locations across United States.
 
 ## Technology Used
-### *  Javascript
+    *  Javascript
     *  Bulma
     *  HTML
 
@@ -15,3 +15,14 @@
 ## Screenshot
 
 ![GitHub Logo](./img/webScreenshot.png)
+
+## Collaborators
+    * Arlon Tuazon
+    * Jonathan Wilferd
+
+## Github URL
+    * https://github.com/ArlonTuazon/ZapDrive
+
+## Live URL
+    *  https://arlontuazon.github.io/ZapDrive/ 
+
