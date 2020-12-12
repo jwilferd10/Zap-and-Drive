@@ -15,4 +15,3 @@
 ## Screenshot
 
 ![GitHub Logo](./img/webScreenshot.png)
-Format: ![Alt Text](./img/webScreenshot.png)
