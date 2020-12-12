@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Find EV Charging Stations Near You</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="./assets/css/customstyle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar has-background-black-ter">
+        <!-- Zap & Go Logo -->
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <img src="./img/zapndrivelogo.png" alt="Site Logo" style="max-height: 80px">
+            </a>
+        </div>
+
+        <!-- Centered Header Text -->
+        <div class="container level-item">
+          <h1 class="is-size-3 has-text-light level-item has-text-centered">Locate Nearest EV Charging Stations</h1>
+      </div>
+
+        <!-- Navbar Links -->
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-end">
+                <a href= "https://github.com/ArlonTuazon/ZapDrive" class="navbar-item has-text-light"> Github Repository </a>
+            </div>
+        </div>
+        
+    </nav> 
+
+    <main>
+
+        <!-- Section -->
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Additional Info:</h1>
+                <h2 class="subtitle">
+                    <div>Closest Ping: <span id="city"></span></div>
+                    <div>City Location: <span id="city2"></span></div>
+                    <div>Latitude: <span id="latitude"></span></div>
+                    <div>Longitude: <span id="longitude"></span></div>
+                </h2>
+                <div class="notification" id = "notify"></div>
+            </div>
+        </section>
+
+        <!-- Form & Map Section -->
+        <section class="section">
+            <div class = "container"id="startSearch"> <h1 class ="title"> Start Searching for EV Charging Location</h1>
+            <div> 
+              <button class="button is-info" id = "searchEV">Click Me!</button> 
+              <button class="button is-light" id="delMark" >Delete all Markers to the Map</button>
+          </div>
+           
+        </div>
+            <div class="container is-fluid">
+            <!-- <h4 class="title is-4"> Enter Desired Location: </h4> -->
+                <div class="columns">
+                    <div class="box column is-2" id = "citySearch"> 
+                        <div class="field">
+                            
+                            <!-- Start of fetching data -->
+                            <label class="label">Enter Desired Location</label>
+                            
+                            
+                            <!-- City Entry -->
+                            <label class="label">City</label>
+                            
+                                <div class="control">
+                                    <input id="inputValue" class="input" type="text" placeholder="Enter a City...">
+                                </div>
+                            </div>
+                          
+                            <!-- State Entry -->
+                            <div class="field">
+                                <label class="label">State</label>
+                                <div class="control">
+                                    <input id="inputValue1" class="input" type="text" placeholder="Enter a State...">
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="control">
+                                <button id="submitBtn" class="button is-info">Submit</button>
+                                
+                            </div>
+
+                        </div>    
+                    <!-- Anything in here will be our location input -->
+                    <!-- We'll probably present the addresses as a card -->
+                    <!-- City: <span id="city1"></span> -->
+                    <div class="tooltip">
+                      <span class="tooltiptext">Click on the list to show markers</span>
+                    
+                       <div class="box column is-2 title1" id ="clickItems">
+                         City: <span id="city1"></span>
+                       </div>
+                    </div>
+                  <div class ="box columns is-narrow" id="mapID"></div>
+                       
+                    
+                  </div> 
+                
+            </div>
+            
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <a href="https://github.com/ArlonTuazon/ZapDrive"><strong>Zap⚡Drive</strong></a> made with lots of ☕
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
