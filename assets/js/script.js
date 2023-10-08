@@ -30,6 +30,8 @@ const removeMarker = () => {
   }
 };
 
+// STOPPING HERE
+
 //Setting up the marker
 var myIcon = L.icon({
   iconUrl: './img/zap.png',
