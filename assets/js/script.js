@@ -15,17 +15,13 @@ let map;
 let marker
 const notificationEl = document.querySelector('.notification');
 
-let markerButton = document.querySelector('#delMark')
-document.getElementById("userInput");
-
-
-var mymap = L.map('mapID').setView([37.09024,-95.712891], 3)
-var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-var tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
-var tiles = L.tileLayer(tileURL, {attribution});
-
-tiles.addTo(mymap);
-var layergroup = L.layerGroup().addTo(mymap);
+// Initialize the map
+const initializeMap = () => {
+  map = L.map('mapID').setView([37.09024,-95.712891], 3);
+  const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const tiles = L.tileLayer(tileURL, { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' });
+  tiles.addTo(map);
+}
 
 function removeLayer () {
   
