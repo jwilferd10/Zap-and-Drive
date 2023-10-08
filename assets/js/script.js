@@ -1,8 +1,4 @@
-// Invested some time refactoring the code provided
-// First and foremost we've got an active problem with the buttons.
-// The buttons generated work fine but when commented out and the same ID and Classes are used in a different button, nothing happens
-// So we'll add or remove sections of the code and try to get this working
-
+// Global QuerySelectors
 let city = document.getElementById("city");
 let latitude1 = document.getElementById("latitude");
 let longitude1 = document.getElementById("longitude");
@@ -11,7 +7,6 @@ let cityOne = document.getElementById("city1");
 let cityTwo = document.getElementById("city2");
 let button1 = document.querySelector("#searchEV");
 
-// Get location if by input if user denied geolocation. Previously on line 137
 let button = document.querySelector('#submitBtn')
 let input = document.querySelector('#inputValue')
 let input1 = document.querySelector('#inputValue1')
@@ -30,10 +25,6 @@ var tiles = L.tileLayer(tileURL, {attribution});
 tiles.addTo(mymap);
 var layergroup = L.layerGroup().addTo(mymap);
 
-markerButton.addEventListener('click', function() {
-  console.log('clicked ')
-   removeLayer();
-})
 function removeLayer () {
   
   // mymap.remove(marker);
@@ -62,12 +53,6 @@ var myIcon = L.icon({
   
 });
 //var marker = L.marker([0, 0], {icon: myIcon}).addTo(mymap);
-
-// Clicking Button1 will grab the users closest location and present the data it's found.
-button1.addEventListener('click', function () {
-  getexactLocation();
-
-})
 
 //Getting user geolocation function
 
@@ -154,51 +139,6 @@ function getGeoLocation(latitude, longitude) {
 // h.parentNode.insertBefore(script, h);
 
 // console.log(h);
-
-
-// NOTE: !!EDITING THIS WILL LIKELY ALLOW US TO FIX ENTRY ISSUE!!
-button.addEventListener('click', function () {
-
-  
-  console.log("input value:" + input1.value);
-  removeLayer();
-  var stateInput = input1.value;
-  localStorage.setItem  ('State' ,stateInput);
-  localStorage.getItem(input1);
-
-  //var letters = /^[A-Za-z]+$/;
-  var cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
-
-  if (!(ValidState(input1.value))) {
-
-    document.getElementById("notify")
-    notificationEl.innerHTML = "<p>Please input valid State!!!</p>"
-  } else {
-    notificationEl.innerHTML = "<p>Valid State Entered</p>"
-  }
-
-  if (!(input.value.match(cityRegex)) || input1.value == "") {
-    console.log("Please input valid city!!");
-    document.getElementById("notify")
-    notificationEl.innerHTML = "<p>Please input valid city!!!</p>"
-
-  }
-
-  // if (!allLetter(input1.value)){
-
-  //   notificationEl.innerHTML = "<p>Please input State Name!!!</p>"
-
-  //}
-
-  if (input.value === "" || input1.value === "") {
-
-    //document.getElementById("notify").style.visibility = "visible"
-    //notificationEl.innerHTML = "<p>Input city and State</p>"
-
-  } else {
-    getLocation();
-  }
-})
 
 function ValidState(sstate) {
 
@@ -307,73 +247,119 @@ function listItemText(event) {
      clickCity = liClicked.textContent
        //console.log (clickCity);
 
-//        var mymap = L.map('mapID').setView([34.2006448, -118.5342368], 1);
+  //        var mymap = L.map('mapID').setView([34.2006448, -118.5342368], 1);
+          
+  // var myIcon = L.icon({
+  //     iconUrl: './assets/zap.png',
+  //     iconSize: [20, 75],
+  //     iconAnchor: [22, 94],
+  //     popupAnchor: [-3, -76]
+      
+  // });
+  
+  // var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  // var tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
+  // var tiles = L.tileLayer(tileURL, {attribution});
+  // tiles.addTo(mymap);
         
-// var myIcon = L.icon({
-//     iconUrl: './assets/zap.png',
-//     iconSize: [20, 75],
-//     iconAnchor: [22, 94],
-//     popupAnchor: [-3, -76]
-    
-// });
- 
-// var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-// var tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
-// var tiles = L.tileLayer(tileURL, {attribution});
-// tiles.addTo(mymap);
-       
-    getEVMap(clickCity);
+      getEVMap(clickCity);
+    }
   }
-}
- 
-//Getting MAP Locations
+  
+  //Getting MAP Locations
 
-// console.log(data);
-// var cityList = my_address;
-// state.addEventListener('click', function(ev) {
-//   ev.target.tagName === 'LI';
+  // console.log(data);
+  // var cityList = my_address;
+  // state.addEventListener('click', function(ev) {
+  //   ev.target.tagName === 'LI';
 
-     
-//    console.log('clicked'+cityList.innerText);
+      
+  //    console.log('clicked'+cityList.innerText);
 
-//getEVMap ();
+  //getEVMap ();
 
 
 
 function getEVMap() {
- 
   removeLayer();
-
- var clickLat ="";
- var clickLng = "";
- console.log (clickLat,clickLng );
-for (element of data) {
-   
-  console.log(clickLat, clickLng);
+  var clickLat ="";
+  var clickLng = "";
+  console.log (clickLat,clickLng );
+  for (element of data) {
+    console.log(clickLat, clickLng);
   
-   
-   clickLat = element.AddressInfo.Latitude;
-   clickLng = element.AddressInfo.Longitude;
-   
-   var cityEVList = element.AddressInfo.AddressLine1;
-   var cityDesc = element.AddressInfo.AccessComments;
-   
-   
+    clickLat = element.AddressInfo.Latitude;
+    clickLng = element.AddressInfo.Longitude;
     
-         marker = L.marker([clickLat, clickLng],{icon: myIcon}).addTo(mymap);
-     var text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-  
-      marker.bindPopup(text);
-      
-}
+    var cityEVList = element.AddressInfo.AddressLine1;
+    var cityDesc = element.AddressInfo.AccessComments;
+    
+    marker = L.marker([clickLat, clickLng],{icon: myIcon}).addTo(mymap);
+    var text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
+    
+    marker.bindPopup(text);
+  };
    
-
 }
 
 
 })
 
 .catch(error => console.log('error', error))
-
-
 }
+
+const searchValidation = () => {
+  console.log("input value:" + input1.value);
+  removeLayer();
+  var stateInput = input1.value;
+  localStorage.setItem  ('State' ,stateInput);
+  localStorage.getItem(input1);
+
+  //var letters = /^[A-Za-z]+$/;
+  var cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
+
+  if (!(ValidState(input1.value))) {
+
+    document.getElementById("notify")
+    notificationEl.innerHTML = "<p>Please input valid State!!!</p>"
+  } else {
+    notificationEl.innerHTML = "<p>Valid State Entered</p>"
+  }
+
+  if (!(input.value.match(cityRegex)) || input1.value == "") {
+    console.log("Please input valid city!!");
+    document.getElementById("notify")
+    notificationEl.innerHTML = "<p>Please input valid city!!!</p>"
+
+  }
+
+  // if (!allLetter(input1.value)){
+
+  //   notificationEl.innerHTML = "<p>Please input State Name!!!</p>"
+
+  //}
+
+  if (input.value === "" || input1.value === "") {
+
+    //document.getElementById("notify").style.visibility = "visible"
+    //notificationEl.innerHTML = "<p>Input city and State</p>"
+
+  } else {
+    getLocation();
+  }
+};
+
+// Event Listeners 
+markerButton.addEventListener('click', function() {
+  console.log('clicked')
+  removeLayer();
+});
+
+button1.addEventListener('click', function () {
+  getexactLocation();
+});
+
+// NOTE: !!EDITING THIS WILL LIKELY ALLOW US TO FIX ENTRY ISSUE!!
+button.addEventListener('click', function () {
+  searchValidation();
+})
