@@ -12,7 +12,7 @@ const OPEN_CHARGE_MAP_API_URL = 'https://api.openchargemap.io/v3/poi/?output=jso
 
 // Global Variables
 let map;
-let marker
+let marker;
 const notificationEl = document.querySelector('.notification');
 
 // Initialize the map
@@ -21,27 +21,15 @@ const initializeMap = () => {
   const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const tiles = L.tileLayer(tileURL, { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' });
   tiles.addTo(map);
-}
+};
 
-function removeLayer () {
-  
-  // mymap.remove(marker);
-  // mymap.closePopup();
-  
-  if (marker !== null) {
-    mymap.remove(marker);
-    mymap.closePopup ();
-   
+// Remove existing marker and layer
+const removeMarker = () => {
+  if (marker) {
+    map.removeLayer(marker);
   }
-  mymap = L.map('mapID').setView([37.09024,-95.712891], 3)
-  attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
- tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
- tiles = L.tileLayer(tileURL, {attribution});
+};
 
-tiles.addTo(mymap);
-  //marker.remove (mymap);
-  //mymap.closePopup ();
-}
 //Setting up the marker
 var myIcon = L.icon({
   iconUrl: './img/zap.png',
@@ -286,4 +274,4 @@ const searchValidation = () => {
 // Event Listeners
 document.querySelector('#searchEV').addEventListener('click', getexactLocation);
 document.querySelector('#submitBtn').addEventListener('click', getexactLocation);
-document.querySelector('#deleteMarker').addEventListener('click', removeLayer);
+document.querySelector('#deleteMarker').addEventListener('click', removeMarker);
