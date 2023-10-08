@@ -7,9 +7,10 @@ let cityOne = document.getElementById("city1");
 let cityTwo = document.getElementById("city2");
 let button1 = document.querySelector("#searchEV");
 
-let button = document.querySelector('#submitBtn')
-let input = document.querySelector('#inputValue')
-let input1 = document.querySelector('#inputValue1')
+// Search Card
+const button = document.querySelector('#submitBtn');
+const input = document.querySelector('#cityValue');
+const input1 = document.querySelector('#stateValue');
 
 
 let marker = "";
