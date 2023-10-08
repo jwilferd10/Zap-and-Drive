@@ -2,18 +2,15 @@
 let city = document.getElementById("city");
 let latitude1 = document.getElementById("latitude");
 let longitude1 = document.getElementById("longitude");
-let notificationEl = document.querySelector(".notification");
 let cityOne = document.getElementById("city1");
 let cityTwo = document.getElementById("city2");
 let button1 = document.querySelector("#searchEV");
 
-// Search Card
-const button = document.querySelector('#submitBtn');
-const input = document.querySelector('#cityValue');
-const input1 = document.querySelector('#stateValue');
+// Global Variables
+let map;
+let marker
+const notificationEl = document.querySelector('.notification');
 
-
-let marker = "";
 let markerButton = document.querySelector('#delMark')
 document.getElementById("userInput");
 
@@ -53,26 +50,16 @@ var myIcon = L.icon({
   popupAnchor: [-3, -76]
   
 });
-//var marker = L.marker([0, 0], {icon: myIcon}).addTo(mymap);
 
 //Getting user geolocation function
-
 function getexactLocation() {
 
   if ('geolocation' in navigator) {
     console.log('geolocation available');
     navigator.geolocation.getCurrentPosition(setPosition, showError);
-    //   console.log (position.coords.latitude);
-    //   console.log (position.coords.longitude);
-    //   latitude.innerHTML = position.coords.latitude;
-    //  longitude.innerHTML = position.coords.longitude;
-
-    // });
   } else {
-    
     console.log('geolocation not available')
     notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
-
   }
 }
 
@@ -96,12 +83,6 @@ function showError(error) {
   document.getElementById("userInput")
 
 }
-
-//  function callback(data) {
-//    //console.log(data);
-//    city.innerHTML = data.city;
-//    latitude.innerHTML = data.latitude;
-//    longitude.innerHTML = data.longitutde;
 
 function getGeoLocation(latitude, longitude) {
 
@@ -132,14 +113,6 @@ function getGeoLocation(latitude, longitude) {
   //return(ret_lat);
 
 }
-
-// var script = document.createElement("script");
-// script.type = "text/javascript";
-// script.src = "https://geoip-db.com/jsonp";
-// var h = document.getElementsByTagName("script")[0];
-// h.parentNode.insertBefore(script, h);
-
-// console.log(h);
 
 function ValidState(sstate) {
 
@@ -245,42 +218,11 @@ var clickCity = "";
 function listItemText(event) {
   var liClicked = event.target;
   if(liClicked.nodeName == "LI"){
-     clickCity = liClicked.textContent
-       //console.log (clickCity);
-
-  //        var mymap = L.map('mapID').setView([34.2006448, -118.5342368], 1);
-          
-  // var myIcon = L.icon({
-  //     iconUrl: './assets/zap.png',
-  //     iconSize: [20, 75],
-  //     iconAnchor: [22, 94],
-  //     popupAnchor: [-3, -76]
-      
-  // });
-  
-  // var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-  // var tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
-  // var tiles = L.tileLayer(tileURL, {attribution});
-  // tiles.addTo(mymap);
-        
+     clickCity = liClicked.textContent     
       getEVMap(clickCity);
     }
   }
   
-  //Getting MAP Locations
-
-  // console.log(data);
-  // var cityList = my_address;
-  // state.addEventListener('click', function(ev) {
-  //   ev.target.tagName === 'LI';
-
-      
-  //    console.log('clicked'+cityList.innerText);
-
-  //getEVMap ();
-
-
-
 function getEVMap() {
   removeLayer();
   var clickLat ="";
@@ -334,33 +276,29 @@ const searchValidation = () => {
 
   }
 
-  // if (!allLetter(input1.value)){
-
-  //   notificationEl.innerHTML = "<p>Please input State Name!!!</p>"
-
-  //}
-
   if (input.value === "" || input1.value === "") {
-
-    //document.getElementById("notify").style.visibility = "visible"
-    //notificationEl.innerHTML = "<p>Input city and State</p>"
 
   } else {
     getLocation();
   }
 };
 
-// Event Listeners 
-markerButton.addEventListener('click', function() {
-  console.log('clicked')
-  removeLayer();
-});
+// Event Listeners
+document.querySelector('#searchEV').addEventListener('click', getexactLocation);
+document.querySelector('#submitBtn').addEventListener('click', getexactLocation);
+document.querySelector('#deleteMarker').addEventListener('click', removeLayer);
 
-button1.addEventListener('click', function () {
-  getexactLocation();
-});
+// // Event Listeners 
+// markerButton.addEventListener('click', function() {
+//   console.log('clicked')
+//   removeLayer();
+// });
 
-// NOTE: !!EDITING THIS WILL LIKELY ALLOW US TO FIX ENTRY ISSUE!!
-button.addEventListener('click', function () {
-  searchValidation();
-})
+// button1.addEventListener('click', function () {
+//   getexactLocation();
+// });
+
+// // NOTE: !!EDITING THIS WILL LIKELY ALLOW US TO FIX ENTRY ISSUE!!
+// button.addEventListener('click', function () {
+//   searchValidation();
+// })
