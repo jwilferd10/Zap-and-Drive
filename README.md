@@ -1,30 +1,48 @@
-# ZapDrive 
+# ⚡Zap and Drive⚡
 
-## Zap & Drive is a website that list the EV charging locations across United States.
+### An app that lists the EV charging locations across United States.
 
-##  Click on the Click Me button for geolocation.
+:computer: **Github Repository**: https://github.com/jwilferd10/Zap-and-Drive
 
-## Technology Used
-    *  Javascript
-    *  Bulma
-    *  HTML
+:computer: **Live Customized Example**: https://arlontuazon.github.io/ZapDrive/ 
 
-## API used
-    *  locations IQ - for geolocation and user input
-    *  openchargeMap - for EV charger locations
-    *  leaflet.js and openstreetmap - for the map
+## :open_file_folder: Table of Contents:
+  - [Preview](#camera-preview)
+  - [Demo](#movie_camera-demo)
+  - [Description](#wave-description)
+  - [User Story](#book-user-story)
+  - [Resources Used](#floppy_disk-resources-used)
+  - [Contributors](#paperclip-contributors)
+  - [Getting Started](#minidisc-getting-started)
+  - [Contact Information](#e-mail-contact-information)
 
-## Screenshot
-
+## :camera: Preview:
 ![GitHub Logo](./img/webScreenshot.png)
 
-## Collaborators
-    * Arlon Tuazon
-    * Jonathan Wilferd
+## :wave: Description: 
+(Coming Soon!)
 
-## Github URL
-    * https://github.com/ArlonTuazon/ZapDrive
+## :book: User Story:
+(Coming Soon!)
 
-## Live URL
-    *  https://arlontuazon.github.io/ZapDrive/ 
+## :floppy_disk: Resources Used:
+- HTML
+- CSS
+- JavaScript
+- Bulma
+- Locations IQ (For geolocation and user input)
+- openchargeMap (For EV charger locations)
+- leaflet.js and openstreetmap (Utilizing the map)
 
+## :minidisc: Getting Started:
+(Coming Soon!)
+
+### Usage
+(Coming Soon!)
+
+## :paperclip: Contributors
+ - Arlon Tuazon (API Selection & Base JavaScript Setup)
+ - Jonathan Wilferd (Front-End Design, Logo Design, Assisted JavaScript Development)
+  
+## :e-mail: Contact Information:
+(Coming Soon!)
