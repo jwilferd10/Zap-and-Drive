@@ -1,10 +1,14 @@
 // Global QuerySelectors
-let city = document.getElementById("city");
-let latitude1 = document.getElementById("latitude");
-let longitude1 = document.getElementById("longitude");
-let cityOne = document.getElementById("city1");
-let cityTwo = document.getElementById("city2");
-let button1 = document.querySelector("#searchEV");
+// let city = document.getElementById("city");
+// let latitude1 = document.getElementById("latitude");
+// let longitude1 = document.getElementById("longitude");
+// let cityOne = document.getElementById("city1");
+// let cityTwo = document.getElementById("city2");
+// let button1 = document.querySelector("#searchEV");
+
+// API URLs and keys
+const LOCATION_API_KEY = 'be7dfdc7a8184f';
+const OPEN_CHARGE_MAP_API_URL = 'https://api.openchargemap.io/v3/poi/?output=json';
 
 // Global Variables
 let map;
@@ -287,18 +291,3 @@ const searchValidation = () => {
 document.querySelector('#searchEV').addEventListener('click', getexactLocation);
 document.querySelector('#submitBtn').addEventListener('click', getexactLocation);
 document.querySelector('#deleteMarker').addEventListener('click', removeLayer);
-
-// // Event Listeners 
-// markerButton.addEventListener('click', function() {
-//   console.log('clicked')
-//   removeLayer();
-// });
-
-// button1.addEventListener('click', function () {
-//   getexactLocation();
-// });
-
-// // NOTE: !!EDITING THIS WILL LIKELY ALLOW US TO FIX ENTRY ISSUE!!
-// button.addEventListener('click', function () {
-//   searchValidation();
-// })
