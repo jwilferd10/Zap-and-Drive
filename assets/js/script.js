@@ -96,143 +96,44 @@ function isValidInput(city, state) {
   return city.match(cityRegex) && isValidState(state);
 };
 
-function getLocation() {
+// Get location based on city and state input
+const getLocation = () => {
+  // For memorie sake, I am using input and input1 although that's changed. REFACTOR THIS AFTERWARDS!
+  const city = input.value.trim();
+  const state = input1.value.trim();
 
-  fetch('https://us1.locationiq.com/v1/search.php?key=be7dfdc7a8184f&city=' + input.value + '&state=' + input1.value + '&country=United States of America&format=json')
+  if (!isValidInput(city, state)) {
+    notificationEl.innerHTML = "<p>Please input valid city and state!</p>";
+    return;
+  }
 
+  fetch(`${OPEN_CHARGE_MAP_API_URL}?key=${LOCATION_API_KEY}&latitude=${city}&longitude=${state}&countrycode=US&maxresults=20&compact=true&verbose=false`)
   .then(response => response.json())
-
   .then(data => {
-    console.log(data);
-    var my_lat = cityOne.innerHTML = data[0]['lat'];
-    var my_lang = cityTwo.innerHTML = data[0]['lon'];
-    console.log("I am here");
-    getChargeStation(my_lat, my_lang);
-    //console.log (ret_val);
-  })
-
-  .catch(err => alert("Wrong City"))
-
-}
-
-//Get charging station based on user location 
-
-function getChargeStation(m_lat, m_lan) {
-
-  console.log("Inside getcharge")
-  
-  var state = document.querySelector('.title1');
-  var html = "";
-  var newLatitude = m_lat;
-  var newLongitude = m_lan;
-
-  fetch('https://api.openchargemap.io/v3/poi/?output=json&latitude=' + newLatitude + '&longitude=' + newLongitude +'&countrycode=US&maxresults=20&compact=true&verbose=false')
-    .then(response => {
-
-      //console.log(response.json());
-      console.log("end of getcharge");
-      return response.json();
-
-    })
-
-    .then(data => {
-      console.log(data)
-
-      var my_index = 0;
-      var my_address = "";
-      data.forEach(element => {
-        console.log(my_index);
-
-        console.log("My Address:" + my_address);
-        console.log("Element Address:" + element.AddressInfo.AddressLine1);
-
-        if (my_address != element.AddressInfo.AddressLine1) {
-
-          console.log(element);
-          let cityVal = element.AddressInfo.AddressLine1;
-          html += `<li>${cityVal}</li>`;
-          state.innerHTML = html;
-          document.getElementById("notify");
-
-        }
-
-        my_address = element.AddressInfo.AddressLine1;
-        my_index++;
-
-      })
-      //Getting Data on Click event
-      
-document.getElementById('clickItems').addEventListener("click",listItemText);
-var clickCity = "";
-function listItemText(event) {
-  var liClicked = event.target;
-  if(liClicked.nodeName == "LI"){
-     clickCity = liClicked.textContent     
-      getEVMap(clickCity);
+    if (data && data.length > 0) {
+      const { Latitude, Longitude, AddressInfo } = data[0];
+      getEVMap(Latitude, Longitude, AddressInfo);
+    } else {
+      notificationEl.innerHTML = "<p>No results found for the given city and state!</p>";
     }
-  }
-  
-function getEVMap() {
-  removeLayer();
-  var clickLat ="";
-  var clickLng = "";
-  console.log (clickLat,clickLng );
-  for (element of data) {
-    console.log(clickLat, clickLng);
-  
-    clickLat = element.AddressInfo.Latitude;
-    clickLng = element.AddressInfo.Longitude;
-    
-    var cityEVList = element.AddressInfo.AddressLine1;
-    var cityDesc = element.AddressInfo.AccessComments;
-    
-    marker = L.marker([clickLat, clickLng],{icon: myIcon}).addTo(mymap);
-    var text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-    
-    marker.bindPopup(text);
-  };
-   
-}
+  })
+  .catch(error => console.log('error', error));
+};
 
+// Display EV Charging stations on the map
+const getEVMap = (latitude, longitude, addressInfo) => {
+  removeMarker();
 
-})
-
-.catch(error => console.log('error', error))
-}
-
-const searchValidation = () => {
-  console.log("input value:" + input1.value);
-  removeLayer();
-  var stateInput = input1.value;
-  localStorage.setItem  ('State' ,stateInput);
-  localStorage.getItem(input1);
-
-  //var letters = /^[A-Za-z]+$/;
-  var cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
-
-  if (!(ValidState(input1.value))) {
-
-    document.getElementById("notify")
-    notificationEl.innerHTML = "<p>Please input valid State!!!</p>"
-  } else {
-    notificationEl.innerHTML = "<p>Valid State Entered</p>"
-  }
-
-  if (!(input.value.match(cityRegex)) || input1.value == "") {
-    console.log("Please input valid city!!");
-    document.getElementById("notify")
-    notificationEl.innerHTML = "<p>Please input valid city!!!</p>"
-
-  }
-
-  if (input.value === "" || input1.value === "") {
-
-  } else {
-    getLocation();
-  }
+  map.setView([latitude, longitude], 15);
+  marker = L.marker([latitude, longitude], { icon: myIcon }).addTo(map);
+  const text = `Address is: ${addressInfo.AddressLine1}, Hours: ${addressInfo.AccessComments}`;
+  marker.bindPopup(text);
 };
 
 // Event Listeners
 document.querySelector('#searchEV').addEventListener('click', getexactLocation);
 document.querySelector('#submitBtn').addEventListener('click', getexactLocation);
 document.querySelector('#deleteMarker').addEventListener('click', removeMarker);
+
+// Initialize the map when the page loads
+initializeMap();
