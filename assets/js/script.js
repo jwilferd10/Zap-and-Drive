@@ -131,8 +131,8 @@ const getEVMap = (latitude, longitude, addressInfo) => {
 };
 
 // Event Listeners
-document.querySelector('#searchEV').addEventListener('click', getexactLocation);
-document.querySelector('#submitBtn').addEventListener('click', getexactLocation);
+document.querySelector('#searchEV').addEventListener('click', getExactLocation);
+document.querySelector('#submitBtn').addEventListener('click', getExactLocation);
 document.querySelector('#deleteMarker').addEventListener('click', removeMarker);
 
 // Initialize the map when the page loads
