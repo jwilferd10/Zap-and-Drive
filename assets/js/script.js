@@ -30,9 +30,7 @@ const removeMarker = () => {
   }
 };
 
-// STOPPING HERE
-
-//Getting user geolocation function
+// Get user's exact location
 const getExactLocation = () => {
   if ('geolocation' in navigator) {
     console.log('geolocation available');
@@ -43,6 +41,44 @@ const getExactLocation = () => {
   }
 };
 
+// Set user's position on the map
+const setPosition = (position) => {
+  const { latitude, longitude } = position.coords;
+  getExactLocation(latitude, longitude);
+};
+
+// Handle geolocation errors
+const showError = (error) => {
+  notificationEl.innerHTML = `<p>${error.message}<br>Please Enter City and State</p>`;
+};
+
+const getGeoLocation = (latitude, longitude) => {
+  fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATION_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
+    .then(response => response.json())   
+    .then(data => {
+      // console.log(data);
+      const cityName = data.address.city;
+      city.innerHTML = data.display_name;
+      latitude1.innerHTML = data.lat;
+      longitude1.innerHTML = data.lon;
+      localStorage.setItem('city', cityName);
+      getChargeStation(data.lat, data.lon);
+    })
+    .catch(error => console.log('error', error));
+};
+
+const isValidState = (state) => {
+  // Array of states users can input
+  const validStates = [
+    "wa", "or", "ca", "ak", "nv", "id", "ut", "az", "hi", "mt", "wy",
+    "co", "nm", "nd", "sd", "ne", "ks", "ok", "tx", "mn", "ia", "mo",
+    "ar", "la", "wi", "il", "ms", "mi", "in", "ky", "tn", "al", "fl",
+    "ga", "sc", "nc", "oh", "wv", "va", "pa", "ny", "vt", "me", "nh",
+    "ma", "ri", "ct", "nj", "de", "md", "dc"
+  ];
+  // Ensure the state is set to lowercase for the search 
+  return validStates.includes(state.toLowerCase());
+};
 
 
 //Setting up the marker
@@ -54,90 +90,11 @@ var myIcon = L.icon({
   
 });
 
-
-//Setting user exact location position
-
-function setPosition(position) {
-
-
-  console.log(position);
-
-  latitude = position.coords.latitude;
-  longitude = position.coords.longitude;
-
-  getGeoLocation(latitude, longitude)
-
-}
-
-function showError(error) {
-  
-  notificationEl.innerHTML = `<p> ${error.message}</p> <br> Just Enter City and State</p>`;
-  document.getElementById("userInput")
-
-}
-
-function getGeoLocation(latitude, longitude) {
-
-  fetch('https://us1.locationiq.com/v1/reverse.php?key=be7dfdc7a8184f&lat=' + latitude + '&lon=' + longitude + '&format=json')
-
-    .then(response => response.json())
-    
-    .then(data => {
-      console.log(data);
-      var newCity = cityTwo.innerHTML = data.address.city;
-      city.innerHTML = data.display_name;
-      var loc_lat = latitude1.innerHTML = data.lat;
-      var loc_lon = longitude1.innerHTML = data.lon;
-      
-      localStorage.setItem  ('city' ,newCity);
-      localStorage.getItem(newCity);
-      getChargeStation(loc_lat, loc_lon)
-
-      console.log("returning from getgeolocation function");
-      //console.log(ret_lat);
-      console.log("done");
-      return (data);
-
-    })
-
-    .catch(error => console.log('error', error));
-
-  //return(ret_lat);
-
-}
-
-function ValidState(sstate) {
-
-  sstates = "wa|or|ca|ak|nv|id|ut|az|hi|mt|wy" +
-
-    "co|nm|nd|sd|ne|ks|ok|tx|mn|ia|mo" +
-
-    "ar|la|wi|il|ms|mi|in|ky|tn|al|fl" +
-
-    "ga|sc|nc|oh|wv|va|pa|ny|vt|me|nh" +
-
-    "ma|ri|ct|nj|de|md|dc";
-
-  if (sstates.indexOf(sstate.toLowerCase() + "|") > -1) {
-
-    return true;
-
-  }
-
-  return false;
-
-}
-
-function allLetter(inputtxt) {
-  var letters = /^[A-Za-z]+$/;
-
-  if (inputtxt.value.match(letters)) {
-    return true;
-  } else {
-    alert("message");
-    return false;
-  }
-}
+// Validate input for city and state
+function isValidInput(city, state) {
+  const cityRegex = /^[a-zA-Z]+$/;
+  return city.match(cityRegex) && isValidState(state);
+};
 
 function getLocation() {
 
