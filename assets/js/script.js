@@ -80,7 +80,6 @@ const isValidState = (state) => {
   return validStates.includes(state.toLowerCase());
 };
 
-
 //Setting up the marker
 var myIcon = L.icon({
   iconUrl: './img/zap.png',
