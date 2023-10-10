@@ -32,6 +32,19 @@ const removeMarker = () => {
 
 // STOPPING HERE
 
+//Getting user geolocation function
+const getExactLocation = () => {
+  if ('geolocation' in navigator) {
+    console.log('geolocation available');
+    navigator.geolocation.getCurrentPosition(setPosition, showError);
+  } else {
+    console.log('Geolocation not available on this browser')
+    notificationEl.innerHTML = "<p>Your current browser doesn't support Geolocation.</p>";
+  }
+};
+
+
+
 //Setting up the marker
 var myIcon = L.icon({
   iconUrl: './img/zap.png',
@@ -41,17 +54,6 @@ var myIcon = L.icon({
   
 });
 
-//Getting user geolocation function
-function getexactLocation() {
-
-  if ('geolocation' in navigator) {
-    console.log('geolocation available');
-    navigator.geolocation.getCurrentPosition(setPosition, showError);
-  } else {
-    console.log('geolocation not available')
-    notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
-  }
-}
 
 //Setting user exact location position
 
