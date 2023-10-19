@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <!-- Navbar -->
     <nav class="navbar has-background-black-ter">
         <!-- Zap & Go Logo -->
@@ -56,7 +57,7 @@
             <div class = "container"id="startSearch"> <h1 class ="title"> Start Searching for EV Charging Location</h1>
             <div> 
               <button class="button is-info" id = "searchEV">Click Me!</button> 
-              <button class="button is-light" id="deleteMarker" >Delete all Markers on the Map</button>
+              <button class="button is-light" id="delMark" >Delete all Markers on the Map</button>
           </div>
            
         </div>
@@ -74,7 +75,7 @@
                             <label class="label">City</label>
                             
                                 <div class="control">
-                                    <input id="cityValue" class="input" type="text" placeholder="Enter a City...">
+                                    <input id="inputValue" class="input" type="text" placeholder="Enter a City...">
                                 </div>
                             </div>
                           
@@ -82,7 +83,7 @@
                             <div class="field">
                                 <label class="label">State</label>
                                 <div class="control">
-                                    <input id="stateValue" class="input" type="text" placeholder="Enter a State...">
+                                    <input id="inputValue1" class="input" type="text" placeholder="Enter a State...">
                                 </div>
                             </div>
 
@@ -103,10 +104,15 @@
                          City: <span id="city1"></span>
                        </div>
                     </div>
-                  <div class ="box columns is-narrow" id="mapID"></div>      
-                </div>   
+                  <div class ="box columns is-narrow" id="mapID"></div>
+                       
+                    
+                  </div> 
+                
             </div>
+            
         </section>
+        
     </main>
 
     <!-- Footer -->
