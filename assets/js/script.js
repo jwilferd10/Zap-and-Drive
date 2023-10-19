@@ -1,361 +1,181 @@
 const LOCATIONIQ_API_KEY = 'pk.ad5fee34ab1e2ea0bd879a1133833e20';
 const OPENCHARGE_API_KEY = '3a67b0b5-eb1a-4f31-b226-2f994d496e41';
 
-let city = document.getElementById("city");
-let latitude1 = document.getElementById("latitude");
-let longitude1 = document.getElementById("longitude");
-let notificationEl = document.querySelector(".notification");
-let cityOne = document.getElementById("city1");
-let cityTwo = document.getElementById("city2");
-let button1 = document.querySelector("#searchEV");
+const cityInput = document.getElementById("city");
+const latitudeInput = document.getElementById("latitude");
+const longitudeInput = document.getElementById("longitude");
+const notificationEl = document.querySelector(".notification");
+const cityOne = document.getElementById("city1");
+const cityTwo = document.getElementById("city2");
+const buttonSearchEV = document.querySelector("#searchEV");
+const buttonSubmit = document.querySelector('#submitBtn');
+const inputValue = document.querySelector('#inputValue');
+const inputValue1 = document.querySelector('#inputValue1');
+const mapContainer = document.getElementById("mapID");
+const markerButton = document.querySelector('#delMark');
+const userInput = document.getElementById("userInput");
 
-// Get location if by input if user denied geolocation. Previously on line 137
-let button = document.querySelector('#submitBtn')
-let input = document.querySelector('#inputValue')
-let input1 = document.querySelector('#inputValue1')
+let mymap;
+let tiles;
+let marker;
 
-
-let marker = "";
-// let markerButton = document.querySelector('#delMark')
-document.getElementById("userInput");
-
-
-var mymap = L.map('mapID').setView([37.09024,-95.712891], 3)
-var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-var tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
-var tiles = L.tileLayer(tileURL, {attribution});
-
-tiles.addTo(mymap);
-var layergroup = L.layerGroup().addTo(mymap);
-
-// markerButton.addEventListener('click', function() {
-//   console.log('clicked ')
-//    removeLayer();
-// })
-function removeLayer () {
-  
-  // mymap.remove(marker);
-  // mymap.closePopup();
-  
-  if (marker !== null) {
-    mymap.remove(marker);
-    mymap.closePopup ();
-   
-  }
-  mymap = L.map('mapID').setView([37.09024,-95.712891], 3)
-  attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
- tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; 
- tiles = L.tileLayer(tileURL, {attribution});
-
-tiles.addTo(mymap);
-  //marker.remove (mymap);
-  //mymap.closePopup ();
-}
-//Setting up the marker
-var myIcon = L.icon({
+const myIcon = L.icon({
   iconUrl: './img/zap.png',
   iconSize: [50, 50],
   iconAnchor: [22, 94],
   popupAnchor: [-3, -76]
-  
 });
-//var marker = L.marker([0, 0], {icon: myIcon}).addTo(mymap);
 
-// Clicking Button1 will grab the users closest location and present the data it's found.
-button1.addEventListener('click', function () {
-  getexactLocation();
+function initializeMap() {
+  mymap = L.map(mapContainer).setView([37.09024, -95.712891], 3);
+  const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  tiles = L.tileLayer(tileURL, { attribution }).addTo(mymap);
+  marker = null;
+}
 
-})
+markerButton.addEventListener('click', function () {
+  removeMarker();
+});
 
-//Getting user geolocation function
-
-function getexactLocation() {
-
-  if ('geolocation' in navigator) {
-    console.log('geolocation available');
-    navigator.geolocation.getCurrentPosition(setPosition, showError);
-    //   console.log (position.coords.latitude);
-    //   console.log (position.coords.longitude);
-    //   latitude.innerHTML = position.coords.latitude;
-    //  longitude.innerHTML = position.coords.longitude;
-
-    // });
-  } else {
-    
-    console.log('geolocation not available')
-    notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
-
+function removeMarker() {
+  if (marker) {
+    mymap.removeLayer(marker);
+    mymap.closePopup();
+    marker = null;
+    initializeMap(); // Reinitialize the map
   }
 }
 
-//Setting user exact location position
+function updateLocalStorage(key, value) {
+  localStorage.setItem(key, value);
+}
+
+function getLocalStorage(key) {
+  return localStorage.getItem(key);
+}
+
+buttonSearchEV.addEventListener('click', function () {
+  getExactLocation();
+});
+
+function getExactLocation() {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(setPosition, showError);
+  } else {
+    notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
+  }
+}
 
 function setPosition(position) {
-
-
-  console.log(position);
-
-  latitude = position.coords.latitude;
-  longitude = position.coords.longitude;
-
-  getGeoLocation(latitude, longitude)
-
+  const { latitude, longitude } = position.coords;
+  getGeoLocation(latitude, longitude);
 }
 
 function showError(error) {
-  
-  notificationEl.innerHTML = `<p> ${error.message}</p> <br> Just Enter City and State</p>`;
-  document.getElementById("userInput")
-
+  notificationEl.innerHTML = `<p>${error.message}</p><br>Just Enter City and State</p>`;
 }
-
-//  function callback(data) {
-//    //console.log(data);
-//    city.innerHTML = data.city;
-//    latitude.innerHTML = data.latitude;
-//    longitude.innerHTML = data.longitutde;
 
 function getGeoLocation(latitude, longitude) {
-
-  fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=` + latitude + '&lon=' + longitude + '&format=json')
-
+  fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
     .then(response => response.json())
-    
     .then(data => {
-      console.log(data);
-      var newCity = cityTwo.innerHTML = data.address.city;
-      city.innerHTML = data.display_name;
-      var loc_lat = latitude1.innerHTML = data.lat;
-      var loc_lon = longitude1.innerHTML = data.lon;
-      
-      localStorage.setItem  ('city' ,newCity);
-      localStorage.getItem(newCity);
-      getChargeStation(loc_lat, loc_lon)
-
-      console.log("returning from getgeolocation function");
-      //console.log(ret_lat);
-      console.log("done");
-      return (data);
-
+      cityInput.innerHTML = data.display_name;
+      latitudeInput.innerHTML = data.lat;
+      longitudeInput.innerHTML = data.lon;
+      updateLocalStorage('city', data.address.city);
+      getChargeStation(data.lat, data.lon);
     })
-
     .catch(error => console.log('error', error));
-
-  //return(ret_lat);
-
 }
 
-// var script = document.createElement("script");
-// script.type = "text/javascript";
-// script.src = "https://geoip-db.com/jsonp";
-// var h = document.getElementsByTagName("script")[0];
-// h.parentNode.insertBefore(script, h);
-
-// console.log(h);
-
-
-// NOTE: !!EDITING THIS WILL LIKELY ALLOW US TO FIX ENTRY ISSUE!!
-button.addEventListener('click', function () {
-
-  
-  console.log("input value:" + input1.value);
-  removeLayer();
-  var stateInput = input1.value;
-  localStorage.setItem  ('State' ,stateInput);
-  localStorage.getItem(input1);
-
-  //var letters = /^[A-Za-z]+$/;
-  var cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
-
-  if (!(ValidState(input1.value))) {
-
-    document.getElementById("notify")
-    notificationEl.innerHTML = "<p>Please input valid State!!!</p>"
+buttonSubmit.addEventListener('click', function () {
+  removeMarker();
+  const stateInput = inputValue1.value;
+  updateLocalStorage('State', stateInput);
+  if (!isValidState(stateInput)) {
+    notificationEl.innerHTML = "<p>Please input valid State!!!</p>";
   } else {
-    notificationEl.innerHTML = "<p>Valid State Entered</p>"
+    notificationEl.innerHTML = "<p>Valid State Entered</p>";
   }
 
-  if (!(input.value.match(cityRegex)) || input1.value == "") {
-    console.log("Please input valid city!!");
-    document.getElementById("notify")
-    notificationEl.innerHTML = "<p>Please input valid city!!!</p>"
-
+  if (!isValidCity(inputValue.value) || inputValue1.value === "") {
+    notificationEl.innerHTML = "<p>Please input valid city!!!</p>";
   }
 
-  // if (!allLetter(input1.value)){
-
-  //   notificationEl.innerHTML = "<p>Please input State Name!!!</p>"
-
-  //}
-
-  if (input.value === "" || input1.value === "") {
-
-    //document.getElementById("notify").style.visibility = "visible"
-    //notificationEl.innerHTML = "<p>Input city and State</p>"
-
-  } else {
+  if (inputValue.value !== "" && inputValue1.value !== "") {
     getLocation();
   }
-})
+});
 
-function ValidState(sstate) {
-
-  sstates = "wa|or|ca|ak|nv|id|ut|az|hi|mt|wy" +
-
-    "co|nm|nd|sd|ne|ks|ok|tx|mn|ia|mo" +
-
-    "ar|la|wi|il|ms|mi|in|ky|tn|al|fl" +
-
-    "ga|sc|nc|oh|wv|va|pa|ny|vt|me|nh" +
-
-    "ma|ri|ct|nj|de|md|dc";
-
-  if (sstates.indexOf(sstate.toLowerCase() + "|") > -1) {
-
-    return true;
-
-  }
-
-  return false;
-
+function isValidState(state) {
+  const validStates = "wa|or|ca|ak|nv|id|ut|az|hi|mt|wy|co|nm|nd|sd|ne|ks|ok|tx|mn|ia|mo|ar|la|wi|il|ms|mi|in|ky|tn|al|fl|ga|sc|nc|oh|wv|va|pa|ny|vt|me|nh|ma|ri|ct|nj|de|md|dc";
+  return validStates.indexOf(state.toLowerCase() + "|") > -1;
 }
 
-function allLetter(inputtxt) {
-  var letters = /^[A-Za-z]+$/;
-
-  if (inputtxt.value.match(letters)) {
-    return true;
-  } else {
-    alert("message");
-    return false;
-  }
+function isValidCity(city) {
+  const cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
+  return city.match(cityRegex) && city !== "";
 }
 
 function getLocation() {
-
-  // REFACTOR THIS LATER
-  fetch(`https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_API_KEY}&city=` + input.value + '&state=' + input1.value + '&country=United States of America&format=json')
-
-  .then(response => response.json())
-
-  .then(data => {
-    console.log(data);
-    var my_lat = cityOne.innerHTML = data[0]['lat'];
-    var my_lang = cityTwo.innerHTML = data[0]['lon'];
-    console.log("I am here");
-    getChargeStation(my_lat, my_lang);
-    //console.log (ret_val);
-  })
-
-  .catch(err => alert("Wrong City"))
-
+  fetch(`https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_API_KEY}&city=${inputValue.value}&state=${inputValue1.value}&country=United States of America&format=json`)
+    .then(response => response.json())
+    .then(data => {
+      const [result] = data;
+      cityOne.innerHTML = result.lat;
+      cityTwo.innerHTML = result.lon;
+      getChargeStation(result.lat, result.lon);
+    })
+    .catch(err => alert("Wrong City"));
 }
 
-//Get charging station based on user location 
-
-function getChargeStation(m_lat, m_lan) {
-
-  console.log("Inside getcharge")
-  
-  var state = document.querySelector('.title1');
-  var html = "";
-  var newLatitude = m_lat;
-  var newLongitude = m_lan;
-
-  fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=` + newLatitude + '&longitude=' + newLongitude +'&countrycode=US&maxresults=20&compact=true&verbose=false')
-    .then(response => {
-
-      //console.log(response.json());
-      console.log("end of getcharge");
-      return response.json();
-
-    })
-
+function getChargeStation(latitude, longitude) {
+  fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
+    .then(response => response.json())
     .then(data => {
-      console.log(data)
+      handleChargeStationData(data);
+    })
+    .catch(error => console.log('error', error));
+}
 
-      var my_index = 0;
-      var my_address = "";
-      data.forEach(element => {
-        console.log(my_index);
+function handleChargeStationData(data) {
+  let html = "";
+  const state = document.querySelector('.title1');
 
-        console.log("My Address:" + my_address);
-        console.log("Element Address:" + element.AddressInfo.AddressLine1);
+  data.forEach(element => {
+    const cityVal = element.AddressInfo.AddressLine1;
+    if (cityVal) {
+      html += `<li>${cityVal}</li>`;
+    }
+  });
 
-        if (my_address != element.AddressInfo.AddressLine1) {
+  state.innerHTML = html;
+  document.getElementById("notify");
 
-          console.log(element);
-          let cityVal = element.AddressInfo.AddressLine1;
-          html += `<li>${cityVal}</li>`;
-          state.innerHTML = html;
-          document.getElementById("notify");
+  document.getElementById('clickItems').addEventListener("click", listItemText);
 
-        }
+  function listItemText(event) {
+    const liClicked = event.target;
+    if (liClicked.nodeName === "LI") {
+      const clickCity = liClicked.textContent;
+      getEVMap(clickCity);
+    }
+  }
 
-        my_address = element.AddressInfo.AddressLine1;
-        my_index++;
-
-      })
-      //Getting Data on Click event
-      
-document.getElementById('clickItems').addEventListener("click",listItemText);
-var clickCity = "";
-function listItemText(event) {
-  var liClicked = event.target;
-  if(liClicked.nodeName == "LI"){
-     clickCity = liClicked.textContent
-    getEVMap(clickCity);
+  function getEVMap(clickCity) {
+    removeMarker();
+    data.forEach(element => {
+      const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
+      if (AddressLine1 === clickCity) {
+        const cityEVList = AddressLine1;
+        const cityDesc = AccessComments;
+        marker = L.marker([Latitude, Longitude], { icon: myIcon }).addTo(mymap);
+        const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
+        marker.bindPopup(text);
+      }
+    });
   }
 }
- 
-//Getting MAP Locations
 
-// console.log(data);
-// var cityList = my_address;
-// state.addEventListener('click', function(ev) {
-//   ev.target.tagName === 'LI';
-
-     
-//    console.log('clicked'+cityList.innerText);
-
-//getEVMap ();
-
-
-
-function getEVMap() {
- 
-  removeLayer();
-
- var clickLat ="";
- var clickLng = "";
- console.log (clickLat,clickLng );
-for (element of data) {
-   
-  console.log(clickLat, clickLng);
-  
-   
-   clickLat = element.AddressInfo.Latitude;
-   clickLng = element.AddressInfo.Longitude;
-   
-   var cityEVList = element.AddressInfo.AddressLine1;
-   var cityDesc = element.AddressInfo.AccessComments;
-   
-   
-    
-         marker = L.marker([clickLat, clickLng],{icon: myIcon}).addTo(mymap);
-     var text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-  
-      marker.bindPopup(text);
-      
-}
-   
-
-}
-
-
-})
-
-.catch(error => console.log('error', error))
-
-
-}
+initializeMap();
