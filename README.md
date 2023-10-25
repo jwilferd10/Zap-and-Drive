@@ -20,7 +20,7 @@
 ![GitHub Logo](./img/webScreenshot.png)
 
 ## :wave: Description: 
-(Coming Soon!)
+Zap & Drive is an application that allows users to search for EV Charging stations across the United States.
 
 ## :book: User Story:
 (Coming Soon!)
