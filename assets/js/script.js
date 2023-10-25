@@ -43,17 +43,8 @@ const removeMarker = () => {
     mymap.removeLayer(marker);
     mymap.closePopup();
     marker = null;
-    initializeMap(); // Reinitialize the map
   }
 };
-
-// const updateLocalStorage = (key, value) => {
-//   localStorage.setItem(key, value);
-// }
-
-// function getLocalStorage(key) {
-//   return localStorage.getItem(key);
-// }
 
 buttonSearchEV.addEventListener('click', function () {
   getExactLocation();
