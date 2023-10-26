@@ -34,10 +34,6 @@ const initializeMap = () => {
   marker = null;
 };
 
-markerButton.addEventListener('click', function () {
-  removeMarker();
-});
-
 const removeMarker = () => {
   if (marker) {
     mymap.removeLayer(marker);
@@ -45,10 +41,6 @@ const removeMarker = () => {
     marker = null;
   }
 };
-
-buttonSearchEV.addEventListener('click', function () {
-  getExactLocation();
-});
 
 const getExactLocation = () => {
   if ('geolocation' in navigator) {
@@ -188,5 +180,9 @@ const handleChargeStationData = (data) => {
     marker.bindPopup(text);
   });
 };
+
+// Event Listeners
+buttonSearchEV.addEventListener('click', () => getExactLocation());
+markerButton.addEventListener('click', () => removeMarker());
 
 initializeMap();
