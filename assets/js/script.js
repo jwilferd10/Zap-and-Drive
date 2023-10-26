@@ -19,13 +19,7 @@ let mymap;
 let tiles;
 let marker;
 
-const myIcon = L.icon({
-  iconUrl: './img/zap.png',
-  iconSize: [50, 50],
-  iconAnchor: [22, 94],
-  popupAnchor: [-3, -76]
-});
-
+// Initialize the OpenStreetMap
 const initializeMap = () => {
   mymap = L.map(mapContainer).setView([37.09024, -95.712891], 3);
   const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -34,6 +28,15 @@ const initializeMap = () => {
   marker = null;
 };
 
+// myIcon contains the marker/img that will show up on the map
+const myIcon = L.icon({
+  iconUrl: './img/zap.png',
+  iconSize: [50, 50],
+  iconAnchor: [22, 94],
+  popupAnchor: [-3, -76]
+});
+
+// Remove the marker when invoked
 const removeMarker = () => {
   if (marker) {
     mymap.removeLayer(marker);
@@ -158,20 +161,7 @@ const handleChargeStationData = (data) => {
     }
   }
 
-  const getEVMap = (clickCity) => {
-    removeMarker();
-    data.forEach(element => {
-      const { Latitude, Longitude, AddressInfo } = element;
-      const { AddressLine1, AccessComments } = AddressInfo;
-      if (AddressLine1 === clickCity) {
-        const cityEVList = AddressLine1;
-        const cityDesc = AccessComments;
-        marker = L.marker([Latitude, Longitude], { icon: myIcon }).addTo(mymap);
-        const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-        marker.bindPopup(text);
-      }
-    });
-  }
+  getEVMap();
 
   // Create markers for all locations
   markers.forEach(markerData => {
@@ -180,6 +170,22 @@ const handleChargeStationData = (data) => {
     marker.bindPopup(text);
   });
 };
+
+const getEVMap = (clickCity) => {
+  removeMarker();
+  data.forEach(element => {
+    const { Latitude, Longitude, AddressInfo } = element;
+    const { AddressLine1, AccessComments } = AddressInfo;
+    if (AddressLine1 === clickCity) {
+      const cityEVList = AddressLine1;
+      const cityDesc = AccessComments;
+      marker = L.marker([Latitude, Longitude], { icon: myIcon }).addTo(mymap);
+      const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
+      marker.bindPopup(text);
+    }
+  });
+};
+
 
 // Event Listeners
 buttonSearchEV.addEventListener('click', () => getExactLocation());
