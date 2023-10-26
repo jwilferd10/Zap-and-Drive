@@ -133,15 +133,27 @@ const getChargeStation = (latitude, longitude) => {
 const handleChargeStationData = (data) => {
   let html = "";
   const state = document.querySelector('.title1');
+  const markers = [];
 
   data.forEach(element => {
     const cityVal = element.AddressInfo.AddressLine1;
     if (cityVal) {
       html += `<li>${cityVal}</li>`;
+      const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
+      if (Latitude && Longitude) {
+        const cityEVList = AddressLine1;
+        const cityDesc = AccessComments;
+        const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
+        markers.push({
+          text,
+          coordinates: [Latitude, Longitude],
+        });
+      }
     }
   });
 
   state.innerHTML = html;
+
   document.getElementById("notify");
 
   document.getElementById('clickItems').addEventListener("click", listItemText);
@@ -157,7 +169,8 @@ const handleChargeStationData = (data) => {
   const getEVMap = (clickCity) => {
     removeMarker();
     data.forEach(element => {
-      const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
+      const { Latitude, Longitude, AddressInfo } = element;
+      const { AddressLine1, AccessComments } = AddressInfo;
       if (AddressLine1 === clickCity) {
         const cityEVList = AddressLine1;
         const cityDesc = AccessComments;
@@ -167,6 +180,13 @@ const handleChargeStationData = (data) => {
       }
     });
   }
+
+  // Create markers for all locations
+  markers.forEach(markerData => {
+    const { text, coordinates } = markerData;
+    marker = L.marker(coordinates, { icon: myIcon }).addTo(mymap);
+    marker.bindPopup(text);
+  });
 };
 
 initializeMap();
