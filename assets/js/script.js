@@ -161,7 +161,7 @@ const handleChargeStationData = (data) => {
     }
   }
 
-  getEVMap();
+  // getEVMap();
 
   // Create markers for all locations
   markers.forEach(markerData => {
