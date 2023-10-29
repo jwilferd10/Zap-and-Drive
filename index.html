@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <!-- Navbar -->
     <nav class="navbar has-background-black-ter">
         <!-- Zap & Go Logo -->
@@ -24,8 +23,8 @@
 
         <!-- Centered Header Text -->
         <div class="container level-item">
-          <h1 class="is-size-3 has-text-light level-item has-text-centered">Locate Nearest EV Charging Stations</h1>
-      </div>
+            <h1 class="is-size-3 has-text-light level-item has-text-centered">Your EV Destination: Find Closest Charging Points</h1>
+        </div>
 
         <!-- Navbar Links -->
         <div class="navbar-menu" id="nav-links">
@@ -37,8 +36,6 @@
     </nav> 
 
     <main>
-
-        <!-- Section -->
         <section class="section">
             <div class="container">
                 <h1 class="title">Additional Info:</h1>
@@ -60,59 +57,50 @@
               <button class="button is-light" id="delMark" >Delete all Markers on the Map</button>
           </div>
            
-        </div>
-            <div class="container is-fluid">
-            <!-- <h4 class="title is-4"> Enter Desired Location: </h4> -->
-                <div class="columns">
-                    <div class="box column is-2" id = "citySearch"> 
-                        <div class="field">
-                            
-                            <!-- Start of fetching data -->
-                            <label class="label">Enter Desired Location</label>
-                            
-                            
-                            <!-- City Entry -->
-                            <label class="label">City</label>
-                            
-                                <div class="control">
-                                    <input id="inputValue" class="input" type="text" placeholder="Enter a City...">
-                                </div>
-                            </div>
-                          
-                            <!-- State Entry -->
-                            <div class="field">
-                                <label class="label">State</label>
-                                <div class="control">
-                                    <input id="inputValue1" class="input" type="text" placeholder="Enter a State...">
-                                </div>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="control">
-                                <button id="submitBtn" class="button is-info">Submit</button>
-                                
-                            </div>
-
-                        </div>    
-                    <!-- Anything in here will be our location input -->
-                    <!-- We'll probably present the addresses as a card -->
-                    <!-- City: <span id="city1"></span> -->
-                    <div class="tooltip">
-                      <span class="tooltiptext">Click on the list to show markers</span>
-                    
-                       <div class="box column is-2 title1" id ="clickItems">
-                         City: <span id="city1"></span>
-                       </div>
-                    </div>
-                  <div class ="box columns is-narrow" id="mapID"></div>
-                       
-                    
-                  </div> 
-                
             </div>
-            
-        </section>
-        
+                <div class="container is-fluid">
+                    <h4 class="title is-4"> Enter Desired Location: </h4>
+                    <div class="columns">
+                        <div class="box column is-2" id = "citySearch"> 
+                            <div class="field">
+                                
+                                <!-- Start of fetching data -->
+                                <label class="label">Enter Desired Location</label>
+                                
+                                
+                                <!-- City Entry -->
+                                <label class="label">City</label>
+                                
+                                    <div class="control">
+                                        <input id="inputValue" class="input" type="text" placeholder="Enter a City...">
+                                    </div>
+                                </div>
+                            
+                                <!-- State Entry -->
+                                <div class="field">
+                                    <label class="label">State</label>
+                                    <div class="control">
+                                        <input id="inputValue1" class="input" type="text" placeholder="Enter a State...">
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="control">
+                                    <button id="submitBtn" class="button is-info">Submit</button>
+                                    
+                                </div>
+                            </div>    
+                        <div class="tooltip">
+                        <span class="tooltiptext">Click on the list to show markers</span>
+                        
+                        <div class="box column is-2 title1" id ="clickItems">
+                            City: <span id="city1"></span>
+                        </div>
+                        </div>
+                    <div class ="box columns is-narrow" id="mapID"></div>
+                </div> 
+            </div>
+        </section>  
     </main>
 
     <!-- Footer -->
@@ -122,6 +110,7 @@
         </div>
     </footer>
 
+    <!-- Script Files -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
