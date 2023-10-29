@@ -52,11 +52,13 @@
         <!-- Form & Map Section -->
         <section class="section">
             <div class = "container"id="startSearch"> <h1 class ="title"> Start Searching for EV Charging Location</h1>
-            <div> 
-              <button class="button is-info" id = "searchEV">Click Me!</button> 
-              <button class="button is-light" id="delMark" >Delete all Markers on the Map</button>
-          </div>
+                <button class="button is-info" id = "searchEV">Click Me!</button> 
+                <button class="button is-light" id="delMark" >Delete all Markers on the Map</button>
+            </div>
            
+            <!-- OpenStreetMap -->
+            <div class="box columns is-narrow" id="mapID"></div>
+
             </div>
                 <div class="container is-fluid">
                     <h4 class="title is-4"> Enter Desired Location: </h4>
@@ -93,11 +95,21 @@
                         <div class="tooltip">
                         <span class="tooltiptext">Click on the list to show markers</span>
                         
-                        <div class="box column is-2 title1" id ="clickItems">
-                            City: <span id="city1"></span>
+                        <!-- Stations List & Prev Searches Wrapper -->
+                        <div>
+                            <!-- Nearby charging stations list -->
+                            <div class="box column is-2 title1" id ="clickItems">
+                                City: <span id="city1"></span>
+                            </div>
+
+                            <!-- Previous searches -->
+                            <!-- <div class="box column is-2" id="">
+                                Previous Searches:
+                                Saves here
+                            </div> -->
                         </div>
-                        </div>
-                    <div class ="box columns is-narrow" id="mapID"></div>
+                    </div>
+                    <!-- <div class ="box columns is-narrow" id="mapID"></div> -->
                 </div> 
             </div>
         </section>  
