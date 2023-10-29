@@ -9,9 +9,13 @@
   } 
   
   #mapID {
-    margin-bottom: .5rem;
-    margin-left: 20px;
+    margin: 10px 0px 10px 15px;
     height: 500px;
+    border-radius: 20px
+  }
+
+  .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    margin-right: 10px !important;
   }
   
   #clickItems {
