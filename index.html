@@ -7,8 +7,7 @@
     <title>Find EV Charging Stations Near You</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
     <link rel="stylesheet" href="./assets/css/customstyle.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/> 
 </head>
 
 <body>
@@ -26,8 +25,7 @@
             <div class="navbar-end">
                 <a href= "https://github.com/jwilferd10/Zap-and-Drive" class="navbar-item has-text-light">Github Repository</a>
             </div>
-        </div>
-        
+        </div> 
     </nav> 
 
     <main class="container">
@@ -46,7 +44,7 @@
 
         <!-- Form & Map Section -->
         <section class="section">
-            <div class = "container"id="startSearch"> <h1 class ="title"> Start Searching for EV Charging Location</h1>
+            <div class = "container"id="startSearch"> <h1 class ="title">Search For EV Charging Locations</h1>
                 <button class="button is-info" id = "searchEV">Search</button> 
                 <button class="button is-light" id="delMark" >Delete Markers</button>
             </div>
@@ -65,16 +63,12 @@
                                 
                                 <!-- Start of fetching data -->
                                 <label class="label">Enter Desired Location</label>
-                                
-                                
                                 <!-- City Entry -->
                                 <label class="label">City</label>
-                                
                                     <div class="control">
                                         <input id="inputValue" class="input" type="text" placeholder="Enter a City...">
                                     </div>
                                 </div>
-                            
                                 <!-- State Entry -->
                                 <div class="field">
                                     <label class="label">State</label>
@@ -82,11 +76,9 @@
                                         <input id="inputValue1" class="input" type="text" placeholder="Enter a State...">
                                     </div>
                                 </div>
-
                                 <!-- Submit Button -->
                                 <div class="control">
                                     <button id="submitBtn" class="button is-info">Submit</button>
-                                    
                                 </div>
                             </div>    
                         <div class="tooltip">
@@ -106,7 +98,6 @@
                             </div> -->
                         </div>
                     </div>
-                    <!-- <div class ="box columns is-narrow" id="mapID"></div> -->
                 </div> 
             </div>
         </section>  
@@ -114,9 +105,9 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="content has-text-centered">
+        <!-- <div class="content has-text-centered">
             <a href="https://github.com/ArlonTuazon/ZapDrive"><strong>Zap⚡Drive</strong></a> made with lots of ☕
-        </div>
+        </div> -->
     </footer>
 
     <!-- Script Files -->
@@ -124,5 +115,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
-
 </html>
