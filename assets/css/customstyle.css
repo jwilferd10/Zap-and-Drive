@@ -58,6 +58,10 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+  #modal-popup.modal {
+    z-index: 1000;
+  }
   
   .footer {
     bottom: 0;
