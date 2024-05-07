@@ -29,6 +29,7 @@
         </div> 
     </nav> 
 
+    <!-- Search Functionality -->
     <main class="container">
         <section class="m-6">
             <h2 class="title is-3 pb-1">Getting Started</h2>
@@ -91,25 +92,30 @@
         Modal Pop-Up Button
     </button>
 
+    <!-- Pop-up modal for search functionality -->
     <div id="modal-popup" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Survey An Area</p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <div class="is-2" id="citySearch"> 
-                <!-- Start of fetching data -->
-                <label class="label">Enter Desired Location</label>
-                <div class="field">
-                    <!-- City Entry -->
-                    <label class="label">City</label>
+            <!-- Modal Header -->
+            <header class="modal-card-head">
+                <p class="modal-card-title">Survey An Area</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <!-- Modal Body -->
+            <section class="modal-card-body">
+                <div class="is-2" id="citySearch"> 
+
+                    <!-- Start of fetching data -->
+                    <label class="label">Enter Desired Location</label>
+                    <div class="field">
+                        <label class="label">City</label>
                         <div class="control">
                             <input id="inputValue" class="input" type="text" placeholder="Enter a City...">
                         </div>
                     </div>
-                    <!-- State Entry -->
+
+                    <!-- State entry and dropdown menu -->
                     <div class="field">
                         <label class="label">State</label>
                         <div class="select">
@@ -169,18 +175,16 @@
                             </select>
                         </div>
                     </div>
-                    <!-- Submit Button -->
-                    <!-- <div class="control">
-                        <button id="submitBtn" class="button is-info">Submit</button>
-                    </div> -->
                 </div>    
-          </section>
-          <footer class="modal-card-foot">
-            <div class="buttons">
-              <button id="submitBtn" class="button is-success">Search</button>
-              <button class="button">Cancel</button>
-            </div>
-          </footer>
+            </section>
+
+            <!-- Modal Footer -->
+            <footer class="modal-card-foot">
+                <div class="buttons">
+                    <button id="submitBtn" class="button is-success">Search</button>
+                    <button class="button">Cancel</button>
+                </div>
+            </footer>
         </div>
     </div>
 
