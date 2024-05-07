@@ -51,8 +51,9 @@
 
         <!-- Form & Map Section -->
         <section class="section">
+            <!-- Search and clear marker buttons -->
             <div class = "container"id="startSearch"> <h1 class ="title">Search For EV Charging Locations</h1>
-                <button class="button is-info" id = "searchEV">Search</button> 
+                <button class="js-modal-trigger" data-target="modal-popup">Modal Pop-Up Button</button>
                 <button class="button is-light" id="delMark" >Delete Markers</button>
             </div>
            
@@ -87,10 +88,6 @@
             </div>
         </section>  
     </main>
-
-    <button class="js-modal-trigger" data-target="modal-popup">
-        Modal Pop-Up Button
-    </button>
 
     <!-- Pop-up modal for search functionality -->
     <section id="modal-popup" class="modal">
@@ -182,6 +179,7 @@
             <footer class="modal-card-foot">
                 <div class="buttons">
                     <button id="submitBtn" class="button is-success">Search</button>
+                    <button class="button is-info" id = "searchEV">Search Immediate Location</button> 
                     <button class="button">Cancel</button>
                 </div>
             </footer>
