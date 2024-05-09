@@ -66,9 +66,9 @@ const getGeoLocation = (latitude, longitude) => {
   fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
     .then(response => response.json())
     .then(data => {
-      cityInput.innerHTML = data.display_name;
-      latitudeInput.innerHTML = data.lat;
-      longitudeInput.innerHTML = data.lon;
+      // cityInput.innerHTML = data.display_name;
+      // latitudeInput.innerHTML = data.lat;
+      // longitudeInput.innerHTML = data.lon;
       // updateLocalStorage('city', data.address.city);
       getChargeStation(data.lat, data.lon);
     })
