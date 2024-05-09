@@ -109,8 +109,8 @@ const getLocation = () => {
     .then(response => response.json())
     .then(data => {
       const [result] = data;
-      cityOne.innerHTML = result.lat;
-      cityTwo.innerHTML = result.lon;
+      // cityOne.innerHTML = result.lat;
+      // cityTwo.innerHTML = result.lon;
       getChargeStation(result.lat, result.lon);
     })
     .catch(err => alert("Wrong City"));
