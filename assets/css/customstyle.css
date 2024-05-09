@@ -11,7 +11,8 @@
   #mapID {
     margin: 10px 0px 10px 15px;
     height: 500px;
-    border-radius: 20px
+    border-radius: 20px;
+    box-shadow: 2px 4px 7px #b5b5b5;
   }
 
   .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
