@@ -158,10 +158,11 @@ const handleChargeStationData = (data) => {
         const cityEVList = AddressLine1;
         const cityDesc = AccessComments;
         const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-        markers.push({
-          text,
-          coordinates: [Latitude, Longitude],
-        });
+        createMarker([Latitude, Longitude], text);
+        // markers.push({
+        //   text,
+        //   coordinates: [Latitude, Longitude],
+        // });
       }
     }
   });
@@ -183,17 +184,17 @@ const handleChargeStationData = (data) => {
   // getEVMap();
 
   // Create markers for all locations
-  markers.forEach(markerData => {
-    const { text, coordinates } = markerData;
-    marker = L.marker(coordinates, { icon: myIcon }).addTo(mymap);
-    marker.bindPopup(text);
-  });
+  // markers.forEach(markerData => {
+  //   const { text, coordinates } = markerData;
+  //   marker = L.marker(coordinates, { icon: myIcon }).addTo(mymap);
+  //   marker.bindPopup(text);
+  // });
 
   console.log(markers);
 };
 
 const getEVMap = (clickCity) => {
-  removeMarkers();
+  // removeMarkers();
   data.forEach(element => {
     const { Latitude, Longitude, AddressInfo } = element;
     const { AddressLine1, AccessComments } = AddressInfo;
