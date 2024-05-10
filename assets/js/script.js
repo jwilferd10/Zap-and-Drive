@@ -139,12 +139,20 @@ const handleChargeStationData = (data) => {
     // Clear existing markers
     removeMarkers();
 
+    // Loop through each element in the 'data' array
     data.forEach(element => {
+      // Destructure relevant properties from 'AddressInfo' object
       const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
       
+      // Check if Latitude, Longitude, and AddressLine1 are truthy
       if (Latitude && Longitude && AddressLine1) {
+        // Construct text for marker popup, include 'AccessComments' or 'Not Found' if unavailable
         const text = `Address is: ${AddressLine1}, Hours: ${AccessComments || 'Not Found'}`;
+
+        // Create a marker at the given Latitude and Longitude with the constructed text
         createMarker([Latitude, Longitude], text);
+
+        // Append an HTML list item containing the address to the 'addressList' string
         addressList += `<li class="cityVal">${AddressLine1}</li>`;
       };
     });
@@ -152,6 +160,7 @@ const handleChargeStationData = (data) => {
     // Populating wrapper with collected list items
     addressListWrapper.innerHTML = addressList;
 
+    // HTML and Console notifications
     document.getElementById("notify");
     console.log(markers);
   } catch (error) {
