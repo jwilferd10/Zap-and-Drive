@@ -139,24 +139,16 @@ const handleChargeStationData = (data) => {
   removeMarkers();
 
   data.forEach(element => {
-    const cityVal = element.AddressInfo.AddressLine1;
-
-    if (cityVal) {
-      addressList += `<li class="cityVal">${cityVal}</li>`;
-      const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
-      
-      if (Latitude && Longitude) {
-        
-        const cityEVList = AddressLine1;
-        const cityDesc = AccessComments;
-        const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-
-        // Pass collected data to createMarker
-        createMarker([Latitude, Longitude], text);
-      };
+    const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
+    
+    if (Latitude && Longitude && AddressLine1) {
+      const text = `Address is: ${AddressLine1}, Hours: ${AccessComments || 'Not Found'}`;
+      createMarker([Latitude, Longitude], text);
+      addressList += `<li class="cityVal">${AddressLine1}</li>`;
     };
   });
 
+  // Populating wrapper with collected list items
   addressListWrapper.innerHTML = addressList;
 
   document.getElementById("notify");
