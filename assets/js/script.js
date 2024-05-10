@@ -168,7 +168,6 @@ const handleChargeStationData = (data) => {
 };
 
 const getEVMap = (clickCity) => {
-  // removeMarkers();
   data.forEach(element => {
     const { Latitude, Longitude, AddressInfo } = element;
     const { AddressLine1, AccessComments } = AddressInfo;
@@ -181,7 +180,6 @@ const getEVMap = (clickCity) => {
     }
   });
 };
-
 
 // Event Listeners
 buttonSearchEV.addEventListener('click', () => getExactLocation());
