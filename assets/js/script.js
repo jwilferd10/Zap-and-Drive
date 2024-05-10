@@ -12,6 +12,7 @@ const inputValue1 = document.querySelector('#inputValue1');
 const mapContainer = document.getElementById("mapID");
 const markerButton = document.querySelector('#delMark');
 const userInput = document.getElementById("userInput");
+const addressListWrapper = document.querySelector('.address-list-wrapper');
 
 let mymap;
 let tiles;
@@ -131,30 +132,34 @@ const getChargeStation = (latitude, longitude) => {
 };
 
 const handleChargeStationData = (data) => {
-  let html = "";
-  const state = document.querySelector('.title1');
+  // This html 
+  let addressList = "";
 
   // Clear existing markers
   removeMarkers();
 
   data.forEach(element => {
     const cityVal = element.AddressInfo.AddressLine1;
+
     if (cityVal) {
-      html += `<li>${cityVal}</li>`;
+      addressList += `<li class="cityVal">${cityVal}</li>`;
       const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
+      
       if (Latitude && Longitude) {
+        
         const cityEVList = AddressLine1;
         const cityDesc = AccessComments;
         const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
+
+        // Pass collected data to createMarker
         createMarker([Latitude, Longitude], text);
-      }
-    }
+      };
+    };
   });
 
-  state.innerHTML = html;
+  addressListWrapper.innerHTML = addressList;
 
   document.getElementById("notify");
-
   document.getElementById('clickItems').addEventListener("click", listItemText);
 
   function listItemText(event) {
