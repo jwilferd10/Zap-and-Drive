@@ -126,12 +126,12 @@ const getChargeStation = (latitude, longitude) => {
   fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
     .then(response => response.json())
     .then(data => {
-      handleChargeStationData(data);
+      populateMapWithChargeStations(data);
     })
     .catch(error => console.log('error', error));
 };
 
-const handleChargeStationData = (data) => {
+const populateMapWithChargeStations = (data) => {
   try {
     // Set addressList to an empty string
     let addressList = "";
