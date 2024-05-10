@@ -21,8 +21,11 @@ let markers = [];
 
 // Initialize the OpenStreetMap
 const initializeMap = () => {
+  // Initialize the map with default view and attribution
   mymap = L.map(mapContainer).setView([37.09024, -95.712891], 3);
   const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  
+  // Add a tile layer with OpenStreetMap tiles
   const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   tiles = L.tileLayer(tileURL, { attribution }).addTo(mymap);
   marker = null;
@@ -36,9 +39,12 @@ const myIcon = L.icon({
   popupAnchor: [-3, -76]
 });
 
-// Remove the marker when invoked
+// Remove all markers from the map
 const removeMarkers = () => {
-  console.log('Before removal:', markers);
+  // Commented Testing Log
+  // console.log('Before removal:', markers);
+
+  // Remove each marker from the map
   markers.forEach(marker => {
     mymap.removeLayer(marker);
   });
@@ -46,17 +52,19 @@ const removeMarkers = () => {
   // Clear the markers array
   markers = [];
 
-  console.log('After removal:', markers);
+  // Commented Testing Log
+  // console.log('After removal:', markers);
 };
 
+// Create a marker at the given coordinates with a popup text
 const createMarker = (coordinates, popupText) => {
+  // Create a marker with the specified coordinates and popup text
   const marker = L.marker(coordinates, { icon: myIcon }).addTo(mymap);
   marker.bindPopup(popupText);
 
   // Add the marker to the markers array.
   markers.push(marker);
 }
-
 
 const getExactLocation = () => {
   if ('geolocation' in navigator) {
@@ -75,9 +83,13 @@ const showError = (error) => {
   notificationEl.innerHTML = `<p>${error.message}</p><br>Just Enter City and State</p>`;
 };
 
+// Get the geographic location using latitude and longitude
 const getGeoLocation = (latitude, longitude) => {
+  // Fetch reverse geocoding data using latitude and longitude
   fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
     .then(response => response.json())
+    
+    // If successful, get charge stations near the location. If unsuccessful, log the error
     .then(data => {
       getChargeStation(data.lat, data.lon);
     })
@@ -102,12 +114,16 @@ buttonSubmit.addEventListener('click', function () {
   }
 });
 
+// Validate the state input against a list of valid states
 const isValidState = (state) => {
+  // Check if the state is included in the list of valid states
   const validStates = "wa|or|ca|ak|nv|id|ut|az|hi|mt|wy|co|nm|nd|sd|ne|ks|ok|tx|mn|ia|mo|ar|la|wi|il|ms|mi|in|ky|tn|al|fl|ga|sc|nc|oh|wv|va|pa|ny|vt|me|nh|ma|ri|ct|nj|de|md|dc";
   return validStates.indexOf(state.toLowerCase() + "|") > -1;
 };
 
+// Validate the city input against a regex pattern
 const isValidCity = (city) => {
+  // Check if the city matches the regex pattern
   const cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
   return city.match(cityRegex) && city !== "";
 };
@@ -122,9 +138,13 @@ const getLocation = () => {
     .catch(err => alert("Wrong City"));
 };
 
+// Get charge stations near the specified location
 const getChargeStation = (latitude, longitude) => {
+  // Fetch charge station data using latitude and longitude
   fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
     .then(response => response.json())
+    
+    // If successful, populate the map with charge stations
     .then(data => {
       populateMapWithChargeStations(data);
     })
