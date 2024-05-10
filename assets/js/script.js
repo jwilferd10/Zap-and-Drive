@@ -162,29 +162,8 @@ const handleChargeStationData = (data) => {
   document.getElementById("notify");
   document.getElementById('clickItems').addEventListener("click", listItemText);
 
-  // function listItemText(event) {
-  //   const liClicked = event.target;
-  //   if (liClicked.nodeName === "LI") {
-  //     const clickCity = liClicked.textContent;
-  //     getEVMap(clickCity);
-  //   }
-  // }
   console.log(markers);
 };
-
-// const getEVMap = (clickCity) => {
-//   data.forEach(element => {
-//     const { Latitude, Longitude, AddressInfo } = element;
-//     const { AddressLine1, AccessComments } = AddressInfo;
-//     if (AddressLine1 === clickCity) {
-//       const cityEVList = AddressLine1;
-//       const cityDesc = AccessComments;
-//       marker = L.marker([Latitude, Longitude], { icon: myIcon }).addTo(mymap);
-//       const text = `Address is: ${cityEVList}, Hours: ${cityDesc}`;
-//       marker.bindPopup(text);
-//     }
-//   });
-// };
 
 // Event Listeners
 buttonSearchEV.addEventListener('click', () => getExactLocation());
