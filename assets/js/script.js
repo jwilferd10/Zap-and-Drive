@@ -16,6 +16,7 @@ const userInput = document.getElementById("userInput");
 let mymap;
 let tiles;
 let marker;
+let markers = [];
 
 // Initialize the OpenStreetMap
 const initializeMap = () => {
@@ -35,13 +36,30 @@ const myIcon = L.icon({
 });
 
 // Remove the marker when invoked
-const removeMarker = () => {
-  if (marker) {
+const removeMarkers = () => {
+  markers.forEach(marker => {
     mymap.removeLayer(marker);
-    mymap.closePopup();
-    marker = null;
-  }
+  });
+
+  // Clear the markers array
+  markers = [];
+
+  console.log(markers);
+  // if (marker) {
+  //   mymap.removeLayer(marker);
+  //   mymap.closePopup();
+  //   marker = null;
+  // }
 };
+
+const createMarker = (coordinates, popupText) => {
+  const marker = L.marker(coordinates, { icon: myIcon }).addTo(mymap);
+  marker.bindPopup(popupText);
+
+  // Add the marker to the markers array.
+  markers.push(marker);
+}
+
 
 const getExactLocation = () => {
   if ('geolocation' in navigator) {
@@ -70,7 +88,7 @@ const getGeoLocation = (latitude, longitude) => {
 };
 
 buttonSubmit.addEventListener('click', function () {
-  removeMarker();
+  removeMarkers();
   const stateInput = inputValue1.value;
   if (!isValidState(stateInput)) {
     notificationEl.innerHTML = "<p>Please input valid State!!!</p>";
@@ -119,7 +137,21 @@ const getChargeStation = (latitude, longitude) => {
 const handleChargeStationData = (data) => {
   let html = "";
   const state = document.querySelector('.title1');
-  const markers = [];
+
+  // Clear existing markers
+  removeMarkers();
+
+  // data.forEach(element => {
+  //   const { Latitude, Longitude, AddressInfo } = element;
+  //   const {AddressLine1, AccessComments } = AddressInfo;
+  //   if (AddressLine1) {
+  //     html += `<li>${AddressLine1}</li>`;
+  //     if (Latitude && Longitude) {
+  //       const text = `Address is: ${AddressLine1}, Hours: ${AccessComments}`;
+  //       createMarker([Latitude, Longitude], text);
+  //     }
+  //   }
+  // });
 
   data.forEach(element => {
     const cityVal = element.AddressInfo.AddressLine1;
@@ -160,10 +192,12 @@ const handleChargeStationData = (data) => {
     marker = L.marker(coordinates, { icon: myIcon }).addTo(mymap);
     marker.bindPopup(text);
   });
+
+  console.log(markers);
 };
 
 const getEVMap = (clickCity) => {
-  removeMarker();
+  removeMarkers();
   data.forEach(element => {
     const { Latitude, Longitude, AddressInfo } = element;
     const { AddressLine1, AccessComments } = AddressInfo;
@@ -180,6 +214,6 @@ const getEVMap = (clickCity) => {
 
 // Event Listeners
 buttonSearchEV.addEventListener('click', () => getExactLocation());
-markerButton.addEventListener('click', () => removeMarker());
+markerButton.addEventListener('click', () => removeMarkers());
 
 initializeMap();
