@@ -132,27 +132,32 @@ const getChargeStation = (latitude, longitude) => {
 };
 
 const handleChargeStationData = (data) => {
-  // Set addressList to an empty string
-  let addressList = "";
+  try {
+    // Set addressList to an empty string
+    let addressList = "";
 
-  // Clear existing markers
-  removeMarkers();
+    // Clear existing markers
+    removeMarkers();
 
-  data.forEach(element => {
-    const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
-    
-    if (Latitude && Longitude && AddressLine1) {
-      const text = `Address is: ${AddressLine1}, Hours: ${AccessComments || 'Not Found'}`;
-      createMarker([Latitude, Longitude], text);
-      addressList += `<li class="cityVal">${AddressLine1}</li>`;
-    };
-  });
+    data.forEach(element => {
+      const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
+      
+      if (Latitude && Longitude && AddressLine1) {
+        const text = `Address is: ${AddressLine1}, Hours: ${AccessComments || 'Not Found'}`;
+        createMarker([Latitude, Longitude], text);
+        addressList += `<li class="cityVal">${AddressLine1}</li>`;
+      };
+    });
 
-  // Populating wrapper with collected list items
-  addressListWrapper.innerHTML = addressList;
+    // Populating wrapper with collected list items
+    addressListWrapper.innerHTML = addressList;
 
-  document.getElementById("notify");
-  console.log(markers);
+    document.getElementById("notify");
+    console.log(markers);
+  } catch (error) {
+    // broadcast error message to console
+    console.log('An error has occurred when handling charge station data:', error)
+  }
 };
 
 // Event Listeners
