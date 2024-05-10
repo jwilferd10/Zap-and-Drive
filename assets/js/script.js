@@ -132,7 +132,7 @@ const getChargeStation = (latitude, longitude) => {
 };
 
 const handleChargeStationData = (data) => {
-  // This html 
+  // Set addressList to an empty string
   let addressList = "";
 
   // Clear existing markers
@@ -160,8 +160,6 @@ const handleChargeStationData = (data) => {
   addressListWrapper.innerHTML = addressList;
 
   document.getElementById("notify");
-  document.getElementById('clickItems').addEventListener("click", listItemText);
-
   console.log(markers);
 };
 
