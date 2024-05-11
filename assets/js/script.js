@@ -135,12 +135,12 @@ const searchValidation = () => {
     return;
   }
 
-  // If both state and city inputs are valid, proceed to getLocation()
+  // If both state and city inputs are valid, proceed to fetchLocationData()
   notificationEl.innerHTML = "<p>Input Accepted</p>";
-  getLocation();
+  fetchLocationData();
 };
 
-const getLocation = async () => {
+const fetchLocationData = async () => {
   try {
     // Fetch the location of the user input
     const response = await fetch(`https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_API_KEY}&city=${inputValue.value}&state=${inputValue1.value}&country=United States of America&format=json`)
@@ -165,7 +165,7 @@ const getLocation = async () => {
     getChargeStation(result.lat, result.lon);
   } catch (error) {
     // Handle any errors
-    console.log('Error in getLocation:', error);
+    console.log('Error in fetchLocationData:', error);
   };
 };
 
