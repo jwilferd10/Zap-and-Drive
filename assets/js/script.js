@@ -111,21 +111,24 @@ const isValidCity = (city) => {
 };
 
 const searchValidation = () => {
-  removeMarkers();
   const stateInput = inputValue1.value;
+  const cityInput = inputValue.value;
+
+  // Check if state input is valid
   if (!isValidState(stateInput)) {
-    notificationEl.innerHTML = "<p>Please input valid State!!!</p>";
-  } else {
-    notificationEl.innerHTML = "<p>Valid State Entered</p>";
+    notificationEl.innerHTML = "<p>Please input a valid state.</p>";
+    return;
   }
 
-  if (!isValidCity(inputValue.value) || inputValue1.value === "") {
-    notificationEl.innerHTML = "<p>Please input valid city!!!</p>";
+  // Check if city input is valid
+  if (!isValidCity(cityInput)) {
+    notificationEl.innerHTML = "<p>Please input a valid city.</p>";
+    return;
   }
 
-  if (inputValue.value !== "" && inputValue1.value !== "") {
-    getLocation();
-  }
+  // If both state and city inputs are valid, proceed to getLocation()
+  notificationEl.innerHTML = "<p>Input Accepted</p>";
+  getLocation();
 };
 
 const getLocation = () => {
