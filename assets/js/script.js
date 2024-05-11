@@ -140,14 +140,33 @@ const searchValidation = () => {
   getLocation();
 };
 
-const getLocation = () => {
-  fetch(`https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_API_KEY}&city=${inputValue.value}&state=${inputValue1.value}&country=United States of America&format=json`)
-    .then(response => response.json())
-    .then(data => {
-      const [result] = data;
-      getChargeStation(result.lat, result.lon);
-    })
-    .catch(err => alert("Wrong City"));
+const getLocation = async () => {
+  try {
+    // Fetch the location of the user input
+    const response = await fetch(`https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_API_KEY}&city=${inputValue.value}&state=${inputValue1.value}&country=United States of America&format=json`)
+    
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error('Failed to fetch location data');
+    }
+
+    // Parse the response data
+    const data = await response.json();
+
+    // Check if any results were returned
+    if (data.length === 0) {
+      throw new Error('No results found');
+    }
+
+    // Extract latitude and longitude from the first result
+    const [result] = data;
+    
+    // Pass the results to the getChargeStation method for processing
+    getChargeStation(result.lat, result.lon);
+  } catch (error) {
+    // Handle any errors
+    console.log('Error in getLocation:', error);
+  };
 };
 
 // Get charge stations near the specified location
