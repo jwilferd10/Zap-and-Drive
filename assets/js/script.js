@@ -96,7 +96,21 @@ const getGeoLocation = (latitude, longitude) => {
     .catch(error => console.log('error', error));
 };
 
-buttonSubmit.addEventListener('click', function () {
+// Validate the state input against a list of valid states
+const isValidState = (state) => {
+  // Check if the state is included in the list of valid states
+  const validStates = "wa|or|ca|ak|nv|id|ut|az|hi|mt|wy|co|nm|nd|sd|ne|ks|ok|tx|mn|ia|mo|ar|la|wi|il|ms|mi|in|ky|tn|al|fl|ga|sc|nc|oh|wv|va|pa|ny|vt|me|nh|ma|ri|ct|nj|de|md|dc";
+  return validStates.indexOf(state.toLowerCase() + "|") > -1;
+};
+
+// Validate the city input against a regex pattern
+const isValidCity = (city) => {
+  // Check if the city matches the regex pattern
+  const cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
+  return city.match(cityRegex) && city !== "";
+};
+
+const searchValidation = () => {
   removeMarkers();
   const stateInput = inputValue1.value;
   if (!isValidState(stateInput)) {
@@ -112,20 +126,6 @@ buttonSubmit.addEventListener('click', function () {
   if (inputValue.value !== "" && inputValue1.value !== "") {
     getLocation();
   }
-});
-
-// Validate the state input against a list of valid states
-const isValidState = (state) => {
-  // Check if the state is included in the list of valid states
-  const validStates = "wa|or|ca|ak|nv|id|ut|az|hi|mt|wy|co|nm|nd|sd|ne|ks|ok|tx|mn|ia|mo|ar|la|wi|il|ms|mi|in|ky|tn|al|fl|ga|sc|nc|oh|wv|va|pa|ny|vt|me|nh|ma|ri|ct|nj|de|md|dc";
-  return validStates.indexOf(state.toLowerCase() + "|") > -1;
-};
-
-// Validate the city input against a regex pattern
-const isValidCity = (city) => {
-  // Check if the city matches the regex pattern
-  const cityRegex = /^[a-zA-z] ?([a-zA-z]|[a-zA-z] )*[a-zA-z]$/;
-  return city.match(cityRegex) && city !== "";
 };
 
 const getLocation = () => {
@@ -190,6 +190,7 @@ const populateMapWithChargeStations = (data) => {
 };
 
 // Event Listeners
+buttonSubmit.addEventListener('click', () => searchValidation());
 buttonSearchEV.addEventListener('click', () => getExactLocation());
 markerButton.addEventListener('click', () => removeMarkers());
 
