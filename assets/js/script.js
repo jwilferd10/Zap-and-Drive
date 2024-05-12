@@ -22,12 +22,13 @@ let markers = [];
 // Initialize the OpenStreetMap
 const initializeMap = () => {
   // Initialize the map with default view and attribution
-  mymap = L.map(mapContainer).setView([37.09024, -95.712891], 3);
   const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-  
-  // Add a tile layer with OpenStreetMap tiles
   const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  mymap = L.map(mapContainer).setView([37.09024, -95.712891], 3);
   tiles = L.tileLayer(tileURL, { attribution }).addTo(mymap);
+
+  // Initialize marker as null
   marker = null;
 };
 
@@ -170,16 +171,25 @@ const fetchLocationData = async () => {
 };
 
 // Get charge stations near the specified location
-const getChargeStation = (latitude, longitude) => {
-  // Fetch charge station data using latitude and longitude
-  fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
-    .then(response => response.json())
-    
-    // If successful, populate the map with charge stations
-    .then(data => {
-      populateMapWithChargeStations(data);
-    })
-    .catch(error => console.log('error', error));
+const getChargeStation = async (latitude, longitude) => {
+  try {
+    // Fetch charge station data using latitude and longitude
+    const response = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
+
+    // Check if response is successful
+    if (!response.ok) {
+      throw new Error('Failed to fetch charge-station data');
+    }
+
+    // Extract the data collected from the response
+    const data = await response.json();
+
+    // Pass the collected data to populateMapWithChargeStations to process results
+    populateMapWithChargeStations(data);
+  } catch(error) {
+    // Handle any errors
+    console.log('Error in getChargeStations:', error);
+  }
 };
 
 const populateMapWithChargeStations = (data) => {
