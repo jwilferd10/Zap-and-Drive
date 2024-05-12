@@ -11,9 +11,7 @@ const mapContainer = document.getElementById("mapID");
 const markerButton = document.querySelector('#delMark');
 const addressListWrapper = document.querySelector('.address-list-wrapper');
 
-let mymap;
-let tiles;
-let marker;
+// Set markers to initially be an empty array
 let markers = [];
 
 // Initialize the OpenStreetMap
