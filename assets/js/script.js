@@ -2,8 +2,6 @@ const LOCATIONIQ_API_KEY = 'pk.ad5fee34ab1e2ea0bd879a1133833e20';
 const OPENCHARGE_API_KEY = '3a67b0b5-eb1a-4f31-b226-2f994d496e41';
 
 const cityInput = document.getElementById("city");
-const latitudeInput = document.getElementById("latitude");
-const longitudeInput = document.getElementById("longitude");
 const notificationEl = document.querySelector(".notification");
 const buttonSearchEV = document.querySelector("#searchEV");
 const buttonSubmit = document.querySelector('#submitBtn');
@@ -11,7 +9,6 @@ const inputValue = document.querySelector('#inputValue');
 const inputValue1 = document.querySelector('#inputValue1');
 const mapContainer = document.getElementById("mapID");
 const markerButton = document.querySelector('#delMark');
-const userInput = document.getElementById("userInput");
 const addressListWrapper = document.querySelector('.address-list-wrapper');
 
 let mymap;
