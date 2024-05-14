@@ -44,31 +44,26 @@
                 <button class="button is-danger" id="delMark"><i class="fas fa-trash-alt pr-2"></i> Clear Markers</button>
             </div>
            
-            <!-- OpenStreetMap -->
-            <div class="columns is-multiline is-mobile">
-                <div class="column is-full" id="mapID"></div>
-            </div>
 
-            <div class="notification" id = "notify"></div>
+            <div class="columns is-multiline">
+                <!-- OpenStreetMap -->
+                <div class="column is-three-quarters-desktop is-full-tablet">
+                    <div id="mapID"></div>
+                </div>
 
-            <!-- Address List -->
-            <div class="container is-fluid">
-                <h4 class="title is-4"> Address List: </h4>
-                <div class="columns">
-
-                    <div class="tooltip">
-                    <span class="tooltiptext">Click on the list to show markers</span>
-                    
-                    <!-- Stations List & Prev Searches Wrapper -->
-                    <div>
+                <!-- Address List -->
+                <div>
+                    <h4 id="address-header" class="title is-4 has-text-centered"> Address List </h4>
+                    <div class="column is-one-quarter-desktop is-full-tablet">
                         <!-- Nearby charging stations list -->
-                        <div class="box column is-2 address-list-wrapper" id ="clickItems">
+                        <div class="box address-list-wrapper" id ="clickItems">
                             <!-- Data collected for addressList will populate here -->
                         </div>
                     </div>
-                </div>
-            </div> 
+                </div>         
+            </div>
 
+            <div class="notification" id = "notify"></div>
         </section>  
     </main>
 

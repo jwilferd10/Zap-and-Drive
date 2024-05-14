@@ -18,6 +18,10 @@
   .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
     margin-right: 10px !important;
   }
+
+  #address-header {
+    margin-bottom: 1px
+  }
   
   #clickItems {
     margin-bottom: .5rem;
