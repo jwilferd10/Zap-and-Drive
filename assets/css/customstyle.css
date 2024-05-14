@@ -22,6 +22,10 @@
   #address-header {
     margin-bottom: 1px
   }
+
+  .address-list-wrapper {
+    min-height: 100px;
+  }
   
   #clickItems {
     margin-bottom: .5rem;
