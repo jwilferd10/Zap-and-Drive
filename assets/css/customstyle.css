@@ -8,6 +8,10 @@
     cursor: pointer;
   } 
   
+  #search-container {
+    background-color: hsl(221deg 8.67% 14.63%);
+  }
+
   #mapID {
     margin: 10px 0px 10px 15px;
     height: 500px;
@@ -25,6 +29,7 @@
 
   .address-list-wrapper {
     min-height: 100px;
+    background-color: hsl(221deg 11.81% 21.96%);
   }
   
   #clickItems {
