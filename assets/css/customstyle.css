@@ -3,91 +3,88 @@
 }
 
 .notification {
-    color: black;
-   
-   }
-  
-  li:hover {
-    background: pink;
-    cursor: pointer;
-  } 
-  
-  #search-container {
-    background-color: hsl(221deg 8.67% 14.63%);
-  }
+  color: black;
+}
 
-  #mapID {
-    margin: 10px 0px 10px 15px;
-    height: 500px;
-    border-radius: 20px;
-    box-shadow: 1px 3px 4px #777575;
-  }
+li:hover {
+  background: pink;
+  cursor: pointer;
+} 
 
-  .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
-    margin-right: 10px !important;
-  }
+#search-container {
+  background-color: hsl(221deg 8.67% 14.63%);
+}
 
-  #address-header {
-    margin-bottom: 1px
-  }
+#mapID {
+  margin: 10px 0px 10px 15px;
+  height: 500px;
+  border-radius: 20px;
+  box-shadow: 1px 3px 4px #777575;
+}
 
-  .address-list-wrapper {
-    min-height: 100px;
-    background-color: hsl(221deg 11.81% 21.96%);
-  }
-  
-  #clickItems {
-    margin-bottom: .5rem;
-    margin-left: 20px;
-    width: 260px;
-    background-color: hsl(221deg 11.81% 21.96%);
-  }
-  
-  #citySearch {
-    margin-bottom: 4.5rem;
-  }
-  
-  #startSearch {
-    margin-bottom: 20px;
-  }
-  
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
+.leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+  margin-right: 10px !important;
+}
+
+#address-header {
+  margin-bottom: 1px;
+}
+
+.address-list-wrapper {
+  min-height: 100px;
+  background-color: hsl(221deg 11.81% 21.96%);
+}
+
+#clickItems {
+  margin-bottom: .5rem;
+  margin-left: 20px;
+  width: 260px;
+  background-color: hsl(221deg 11.81% 21.96%);
+}
+
+#citySearch {
+  margin-bottom: 4.5rem;
+}
+
+#startSearch {
+  margin-bottom: 20px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+    
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+    
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#modal-popup.modal {
+  z-index: 1000;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  padding: 50px 25px 50px 25px;
+}
+
+@media screen and (max-width: 480px) {
+  .mapbox {
+      width: 250x;
+      height: 250px;
       
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: white;
-    color: black;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-      
-  /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
   }
-      
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
-
-  #modal-popup.modal {
-    z-index: 1000;
-  }
-  
-  .footer {
-    bottom: 0;
-    width: 100%;
-    padding: 50px 25px 50px 25px;
-  }
-
-  @media screen and (max-width: 480px) {
-    .mapbox {
-        width: 250x;
-        height: 250px;
-        
-    }
-  }
+}
