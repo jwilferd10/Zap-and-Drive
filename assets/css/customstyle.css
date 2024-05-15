@@ -16,7 +16,7 @@
     margin: 10px 0px 10px 15px;
     height: 500px;
     border-radius: 20px;
-    box-shadow: 2px 4px 7px #b5b5b5;
+    box-shadow: 1px 3px 4px #777575;
   }
 
   .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
@@ -43,10 +43,6 @@
   }
   
   #startSearch {
-    margin-bottom: 10px;
-  }
-  
-  #searchEV {
     margin-bottom: 10px;
   }
   
