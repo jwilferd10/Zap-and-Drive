@@ -44,6 +44,14 @@ const removeMarkers = () => {
 
   // Clear the markers array
   markers = [];
+  
+  // debugger;
+  resetMapView();
+};
+
+// Resets the map back to original view
+const resetMapView = () => {
+  mymap.setView([37.09024, -95.712891], 4);
 };
 
 // Create a marker at the given coordinates with a popup text
@@ -165,6 +173,8 @@ const fetchLocationData = async () => {
 // Get charge stations near the specified location
 const getChargeStation = async (latitude, longitude) => {
   try {
+    removeMarkers();
+
     // Fetch charge station data using latitude and longitude
     const response = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
 
@@ -188,9 +198,6 @@ const populateMapWithChargeStations = (data) => {
   try {
     // Set addressList to an empty string
     let addressList = "";
-
-    // Clear existing markers
-    removeMarkers();
 
     // Loop through each element in the 'data' array
     data.forEach(element => {
