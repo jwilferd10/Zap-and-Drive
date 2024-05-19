@@ -20,7 +20,7 @@ const initializeMap = () => {
   const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
   const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-  mymap = L.map(mapContainer).setView([37.09024, -95.712891], 3);
+  mymap = L.map(mapContainer).setView([37.09024, -95.712891], 4);
   tiles = L.tileLayer(tileURL, { attribution }).addTo(mymap);
 
   // Initialize marker as null
