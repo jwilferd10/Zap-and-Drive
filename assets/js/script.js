@@ -57,7 +57,7 @@ const removeMarkers = () => {
 
 // Resets the map back to original view
 const resetMapView = () => {
-  mymap.setView([37.09024, -95.712891], 4);
+  mymap.flyTo([37.09024, -95.712891], 4);
 };
 
 // Create a marker at the given coordinates with a popup text
@@ -169,7 +169,7 @@ const fetchLocationData = async () => {
     getChargeStation(result.lat, result.lon);
 
     // Zoom the map in on the searched location
-    mymap.setView([result.lat, result.lon], 13)
+    mymap.flyTo([result.lat, result.lon], 13)
   } catch (error) {
     // Handle any errors
     console.log('Error in fetchLocationData:', error);
