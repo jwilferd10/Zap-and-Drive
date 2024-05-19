@@ -37,9 +37,6 @@ const myIcon = L.icon({
 
 // Remove all markers from the map
 const removeMarkers = () => {
-  // Commented Testing Log
-  // console.log('Before removal:', markers);
-
   // Remove each marker from the map
   markers.forEach(marker => {
     mymap.removeLayer(marker);
@@ -47,9 +44,6 @@ const removeMarkers = () => {
 
   // Clear the markers array
   markers = [];
-
-  // Commented Testing Log
-  // console.log('After removal:', markers);
 };
 
 // Create a marker at the given coordinates with a popup text
