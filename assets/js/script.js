@@ -44,7 +44,14 @@ const removeMarkers = () => {
 
   // Clear the markers array
   markers = [];
-  
+
+  // Set addressList to an empty string
+  let addressList = "";
+
+  // Populating wrapper with collected list items
+  addressListWrapper.innerHTML = addressList;
+
+  // Reset the map view
   resetMapView();
 };
 
