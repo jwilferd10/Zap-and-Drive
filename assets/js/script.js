@@ -159,6 +159,9 @@ const fetchLocationData = async () => {
     
     // Pass the results to the getChargeStation method for processing
     getChargeStation(result.lat, result.lon);
+
+    // Zoom the map in on the searched location
+    mymap.setView([result.lat, result.lon], 13)
   } catch (error) {
     // Handle any errors
     console.log('Error in fetchLocationData:', error);
