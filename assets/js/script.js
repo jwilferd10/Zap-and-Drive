@@ -45,7 +45,6 @@ const removeMarkers = () => {
   // Clear the markers array
   markers = [];
   
-  // debugger;
   resetMapView();
 };
 
