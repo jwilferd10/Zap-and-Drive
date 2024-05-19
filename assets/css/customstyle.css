@@ -6,8 +6,8 @@
   color: black;
 }
 
-li:hover {
-  background: pink;
+.cityVal:hover {
+  background: rgb(72, 71, 71);
   cursor: pointer;
 } 
 
