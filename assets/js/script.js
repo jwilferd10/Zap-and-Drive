@@ -75,7 +75,7 @@ const showError = (error) => {
 };
 
 // Get the geographic location using latitude and longitude
-const getGeoLocation = async (latitude, longitude) => {
+const getGeoLocation = async () => {
   try {
     // Check if browser supports Geolocation
     if (!('geolocation' in navigator)) {
