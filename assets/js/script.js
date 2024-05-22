@@ -141,7 +141,7 @@ const getGeoLocation = async () => {
   };
 };
 
-// Activated when searchValidation accepts user input, fetches location data
+// Activated when searchValidation accepts user input, fetches location coordinates 
 const fetchLocationData = async () => {
   try {
     // Fetch the location of the user input
@@ -165,9 +165,6 @@ const fetchLocationData = async () => {
     
     // Pass the results to the getChargeStation method for processing
     getChargeStation(result.lat, result.lon);
-
-    // Zoom the map in on the searched location
-    // mymap.flyTo([result.lat, result.lon], 13)
   } catch (error) {
     // Handle any errors
     console.log('Error in fetchLocationData:', error);
