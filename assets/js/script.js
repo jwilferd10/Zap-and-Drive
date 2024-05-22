@@ -70,26 +70,6 @@ const createMarker = (coordinates, popupText) => {
   markers.push(marker);
 }
 
-// // Called to retrieve the exact geographic location of the user
-// const getExactLocation = () => {
-//   // Checks if browser supports geolocation using the `in` operator to check if the geolocation property exists in the navigator object.
-//   if ('geolocation' in navigator) {
-//     //  retrieves the current position of the user
-//     navigator.geolocation.getCurrentPosition(setPosition, showError);
-//   } else {
-//     // error callback function
-//     notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
-//   }
-// };
-
-// // contains information about the user's current position, including latitude and longitude.
-// const setPosition = (position) => {
-//   // extract the latitude and longitude properties from the coords object of the position.
-//   const { latitude, longitude } = position.coords;
-//   // passing the latitude and longitude as arguments
-//   getGeoLocation(latitude, longitude);
-// };
-
 const showError = (error) => {
   notificationEl.innerHTML = `<p>${error.message}</p><br>Just Enter City and State</p>`;
 };
