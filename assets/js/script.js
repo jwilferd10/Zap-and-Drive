@@ -74,30 +74,6 @@ const showError = (error) => {
   notificationEl.innerHTML = `<p>${error.message}</p><br>Just Enter City and State</p>`;
 };
 
-// Get the geographic location using latitude and longitude
-const getGeoLocation = async () => {
-  try {
-    // Check if browser supports Geolocation
-    if (!('geolocation' in navigator)) {
-      throw new Error("Browser doesn't support Geolocation");
-    }
-
-    // Retrieve current user position 
-    const position = await getCurrentPosition();
-    const { latitude, longitude } = position.coords;
-
-    // Fetch reverse geocoding data using latitude and longitude
-    const response = await fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
-    const data = await response.json();
-      
-    // If successful, get charge stations near the location. 
-    getChargeStation(data.lat, data.lon);
-  } catch (error) {
-    // Handle errors
-    console.log('Error in getGeoLocation:' , error);
-  };
-};
-
 // Wrap the geolocation method in a promise
 const getCurrentPosition = () => {
   return new Promise((resolve, reject) => {
@@ -141,6 +117,31 @@ const searchValidation = () => {
   fetchLocationData();
 };
 
+// getGeoLocation collects users current coordinates and uses the lat and long to gather station locations
+const getGeoLocation = async () => {
+  try {
+    // Check if browser supports Geolocation
+    if (!('geolocation' in navigator)) {
+      throw new Error("Browser doesn't support Geolocation");
+    }
+
+    // Retrieve current user position 
+    const position = await getCurrentPosition();
+    const { latitude, longitude } = position.coords;
+
+    // Fetch reverse geocoding data using latitude and longitude
+    const response = await fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
+    const data = await response.json();
+      
+    // If successful, get charge stations near the location. 
+    getChargeStation(data.lat, data.lon);
+  } catch (error) {
+    // Handle errors
+    console.log('Error in getGeoLocation:' , error);
+  };
+};
+
+// Activated when searchValidation accepts user input, fetches location data
 const fetchLocationData = async () => {
   try {
     // Fetch the location of the user input
