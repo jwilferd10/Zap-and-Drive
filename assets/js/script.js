@@ -70,25 +70,25 @@ const createMarker = (coordinates, popupText) => {
   markers.push(marker);
 }
 
-// Called to retrieve the exact geographic location of the user
-const getExactLocation = () => {
-  // Checks if browser supports geolocation using the `in` operator to check if the geolocation property exists in the navigator object.
-  if ('geolocation' in navigator) {
-    //  retrieves the current position of the user
-    navigator.geolocation.getCurrentPosition(setPosition, showError);
-  } else {
-    // error callback function
-    notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
-  }
-};
+// // Called to retrieve the exact geographic location of the user
+// const getExactLocation = () => {
+//   // Checks if browser supports geolocation using the `in` operator to check if the geolocation property exists in the navigator object.
+//   if ('geolocation' in navigator) {
+//     //  retrieves the current position of the user
+//     navigator.geolocation.getCurrentPosition(setPosition, showError);
+//   } else {
+//     // error callback function
+//     notificationEl.innerHTML = "<p>Browser doesn't support Geolocation</p>";
+//   }
+// };
 
-// contains information about the user's current position, including latitude and longitude.
-const setPosition = (position) => {
-  // extract the latitude and longitude properties from the coords object of the position.
-  const { latitude, longitude } = position.coords;
-  // passing the latitude and longitude as arguments
-  getGeoLocation(latitude, longitude);
-};
+// // contains information about the user's current position, including latitude and longitude.
+// const setPosition = (position) => {
+//   // extract the latitude and longitude properties from the coords object of the position.
+//   const { latitude, longitude } = position.coords;
+//   // passing the latitude and longitude as arguments
+//   getGeoLocation(latitude, longitude);
+// };
 
 const showError = (error) => {
   notificationEl.innerHTML = `<p>${error.message}</p><br>Just Enter City and State</p>`;
@@ -97,6 +97,15 @@ const showError = (error) => {
 // Get the geographic location using latitude and longitude
 const getGeoLocation = async (latitude, longitude) => {
   try {
+    // Check if browser supports Geolocation
+    if (!('geolocation' in navigator)) {
+      throw new Error("Browser doesn't support Geolocation");
+    }
+
+    // Retrieve current user position 
+    const position = await getCurrentPosition();
+    const { latitude, longitude } = position.coords;
+
     // Fetch reverse geocoding data using latitude and longitude
     const response = await fetch(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=json`)
     const data = await response.json();
@@ -107,6 +116,14 @@ const getGeoLocation = async (latitude, longitude) => {
     // Handle errors
     console.log('Error in getGeoLocation:' , error);
   };
+};
+
+// Wrap the geolocation method in a promise
+const getCurrentPosition = () => {
+  return new Promise((resolve, reject) => {
+    //  retrieves the current position of the user
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
 };
 
 // Validate the state input against a list of valid states
@@ -169,7 +186,7 @@ const fetchLocationData = async () => {
     getChargeStation(result.lat, result.lon);
 
     // Zoom the map in on the searched location
-    mymap.flyTo([result.lat, result.lon], 13)
+    // mymap.flyTo([result.lat, result.lon], 13)
   } catch (error) {
     // Handle any errors
     console.log('Error in fetchLocationData:', error);
@@ -181,6 +198,7 @@ const getChargeStation = async (latitude, longitude) => {
   try {
     removeMarkers();
 
+    mymap.flyTo([latitude, longitude], 13)
     // Fetch charge station data using latitude and longitude
     const response = await fetch(`https://api.openchargemap.io/v3/poi/?output=json&key=${OPENCHARGE_API_KEY}&latitude=${latitude}&longitude=${longitude}&countrycode=US&maxresults=20&compact=true&verbose=false`)
 
@@ -237,7 +255,7 @@ const populateMapWithChargeStations = (data) => {
 
 // Event Listeners
 buttonSubmit.addEventListener('click', () => searchValidation());
-buttonSearchEV.addEventListener('click', () => getExactLocation());
+buttonSearchEV.addEventListener('click', () => getGeoLocation());
 markerButton.addEventListener('click', () => removeMarkers());
 
 initializeMap();
