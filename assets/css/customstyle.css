@@ -3,7 +3,7 @@
 }
 
 .notification {
-  color: black;
+  display: hidden;
 }
 
 .cityVal:hover {

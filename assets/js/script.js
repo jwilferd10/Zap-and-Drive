@@ -14,6 +14,8 @@ const addressListWrapper = document.querySelector('.address-list-wrapper');
 // Set markers to initially be an empty array
 let markers = [];
 
+// Create a reusable function that allows for an easily modifiable notificationEl
+
 // Initialize the OpenStreetMap
 const initializeMap = () => {
   // Initialize the map with default view and attribution
