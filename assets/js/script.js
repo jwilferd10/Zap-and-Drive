@@ -74,6 +74,8 @@ const removeMarkers = () => {
   // Populating wrapper with collected list items
   addressListWrapper.innerHTML = addressList;
 
+  notificationMessage("Map reset: All markers have been successfully cleared", {color: 'hsl(0, 0%, 100%))', backgroundColor: 'hsl(348, 100%, 61%)'});
+
   // Reset the map view
   resetMapView();
 };
@@ -136,7 +138,6 @@ const searchValidation = () => {
   }
 
   // If both state and city inputs are valid, proceed to fetchLocationData()
-  notificationMessage('Search Successful!', {color: 'hsl(0, 0%, 100%))', backgroundColor: 'hsl(141, 71%, 48%)'});
   fetchLocationData();
 };
 
@@ -157,7 +158,6 @@ const getGeoLocation = async () => {
     const data = await response.json();
       
     // If successful, get charge stations near the location. 
-    notificationMessage();
     getChargeStation(data.lat, data.lon);
   } catch (error) {
     // Handle errors
@@ -213,6 +213,7 @@ const getChargeStation = async (latitude, longitude) => {
     const data = await response.json();
 
     // Pass the collected data to populateMapWithChargeStations to process results
+    notificationMessage('Search Successful!', {color: 'hsl(0, 0%, 100%))', backgroundColor: 'hsl(141, 71%, 48%)'});
     populateMapWithChargeStations(data);
   } catch(error) {
     // Handle any errors
