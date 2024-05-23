@@ -30,6 +30,11 @@ const notificationMessage = (message, styles) => {
 
   // Display notification container
   notificationEl.style.display = 'block';
+
+  // Set a timeout to hide the notification after 2000 miliseconds
+  setTimeout(() => {
+    notificationEl.style.display = 'none';
+  }, 3000); 
 };
 
 // Initialize the OpenStreetMap
