@@ -25,9 +25,12 @@ const notificationMessage = (message, styles) => {
     notificationEl.style[property] = value;
   };
 
+  // Add a blinking effect
+  notificationEl.classList.add('blinkingEffect');
+
   // Display notification container
   notificationEl.style.display = 'block';
-}
+};
 
 // Initialize the OpenStreetMap
 const initializeMap = () => {
@@ -128,7 +131,7 @@ const searchValidation = () => {
   }
 
   // If both state and city inputs are valid, proceed to fetchLocationData()
-  notificationMessage('Search Successful!', {color: 'green', backgroundColor: 'blue'});
+  notificationMessage('Search Successful!', {color: 'hsl(0, 0%, 100%))', backgroundColor: 'hsl(141, 71%, 48%)'});
   fetchLocationData();
 };
 
