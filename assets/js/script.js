@@ -222,8 +222,6 @@ const populateMapWithChargeStations = (data) => {
     // Populating wrapper with collected list items
     addressListWrapper.innerHTML = addressList;
 
-    // HTML and Console notifications
-    document.getElementById("notify");
     console.log(markers);
   } catch (error) {
     // broadcast error message to console
