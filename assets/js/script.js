@@ -15,6 +15,18 @@ const addressListWrapper = document.querySelector('.address-list-wrapper');
 let markers = [];
 
 // Create a reusable function that allows for an easily modifiable notificationEl
+const successNotification = (message, styles) => {
+  // Set the message content
+  notificationEl.textContent = message;
+
+  // Apply the provided styles
+  for (const [property, value] of Object.entries(styles)) {
+    notificationEl.style[property] = value;
+  }
+
+  // Display notification container
+  notificationEl.style.display = 'block';
+}
 
 // Initialize the OpenStreetMap
 const initializeMap = () => {
@@ -115,7 +127,7 @@ const searchValidation = () => {
   }
 
   // If both state and city inputs are valid, proceed to fetchLocationData()
-  notificationEl.innerHTML = "<p>Input Accepted</p>";
+  successNotification('Search Successful!', {color: 'green', backgroundColor: 'blue'});
   fetchLocationData();
 };
 
@@ -136,6 +148,7 @@ const getGeoLocation = async () => {
     const data = await response.json();
       
     // If successful, get charge stations near the location. 
+    successNotification();
     getChargeStation(data.lat, data.lon);
   } catch (error) {
     // Handle errors
