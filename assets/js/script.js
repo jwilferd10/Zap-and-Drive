@@ -132,7 +132,9 @@ const searchValidation = () => {
   }
 
   if (cityInput === '') {
-    console.log('City input is an empty string')
+    console.log('City input is an empty string');
+    buttonSubmit.classList.add('is-dark');
+    buttonSubmit.disabled = true;
     return;
   }
 
