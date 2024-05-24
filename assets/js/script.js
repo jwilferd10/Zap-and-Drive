@@ -131,6 +131,11 @@ const searchValidation = () => {
     return;
   }
 
+  if (cityInput === '') {
+    console.log('City input is an empty string')
+    return;
+  }
+
   // Check if city input is valid
   if (!isValidCity(cityInput)) {
     notificationEl.innerHTML = "<p>Please input a valid city.</p>";
