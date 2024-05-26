@@ -123,7 +123,8 @@ const isValidCity = (city) => {
 
 // Function to update button state
 const updateButtonState = () => {
-  const cityInputValue = cityInput.value.trim();
+  const cityInputValue = inputValue.value.trim();
+  
   if (cityInputValue !== '') {
     buttonSubmit.classList.remove('is-dark');
     buttonSubmit.disabled = false;
@@ -132,9 +133,6 @@ const updateButtonState = () => {
     buttonSubmit.disabled = true;
   }
 };
-
-// Attach event listener to the city input field to monitor changes
-cityInput.addEventListener('input', updateButtonState);
 
 const searchValidation = () => {
   const stateInput = inputValue1.value;
@@ -145,9 +143,6 @@ const searchValidation = () => {
     notificationEl.innerHTML = "<p>Please input a valid state.</p>";
     return;
   }
-
-  // Attach event listener to the city input field to monitor changes
-document.getElementById('cityInput').addEventListener('input', updateButtonState);
   
   // Check if city input is valid
   if (!isValidCity(cityInput)) {
@@ -278,5 +273,10 @@ updateButtonState();
 buttonSubmit.addEventListener('click', () => searchValidation());
 buttonSearchEV.addEventListener('click', () => getGeoLocation());
 markerButton.addEventListener('click', () => removeMarkers());
+
+// Attaching an event listener to the city input field to monitor changes
+document.addEventListener('DOMContentLoaded', () => {
+  inputValue.addEventListener('input', updateButtonState);
+});
 
 initializeMap();
