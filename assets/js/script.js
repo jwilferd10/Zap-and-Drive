@@ -152,6 +152,11 @@ const searchValidation = () => {
 
   // If both state and city inputs are valid, proceed to fetchLocationData()
   fetchLocationData();
+
+  // Reset input values
+  inputValue1.value = '';
+  inputValue.value = '';
+
 };
 
 // getGeoLocation collects users current coordinates and uses the lat and long to gather station locations
