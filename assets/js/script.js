@@ -121,9 +121,24 @@ const isValidCity = (city) => {
   return city.match(cityRegex) && city !== "";
 };
 
+// Function to update button state
+const updateButtonState = () => {
+  const cityInputValue = cityInput.value.trim();
+  if (cityInputValue !== '') {
+    buttonSubmit.classList.remove('is-dark');
+    buttonSubmit.disabled = false;
+  } else {
+    buttonSubmit.classList.add('is-dark');
+    buttonSubmit.disabled = true;
+  }
+};
+
+// Attach event listener to the city input field to monitor changes
+cityInput.addEventListener('input', updateButtonState);
+
 const searchValidation = () => {
   const stateInput = inputValue1.value;
-  const cityInput = inputValue.value;
+  const cityInput = inputValue.value.trim();
 
   // Check if state input is valid
   if (!isValidState(stateInput)) {
@@ -131,13 +146,9 @@ const searchValidation = () => {
     return;
   }
 
-  if (cityInput === '') {
-    console.log('City input is an empty string');
-    buttonSubmit.classList.add('is-dark');
-    buttonSubmit.disabled = true;
-    return;
-  }
-
+  // Attach event listener to the city input field to monitor changes
+document.getElementById('cityInput').addEventListener('input', updateButtonState);
+  
   // Check if city input is valid
   if (!isValidCity(cityInput)) {
     notificationEl.innerHTML = "<p>Please input a valid city.</p>";
@@ -260,6 +271,8 @@ const populateMapWithChargeStations = (data) => {
     console.log('An error has occurred when handling charge station data:', error)
   }
 };
+
+updateButtonState();
 
 // Event Listeners
 buttonSubmit.addEventListener('click', () => searchValidation());
