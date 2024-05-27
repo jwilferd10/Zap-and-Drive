@@ -134,6 +134,13 @@ const updateButtonState = () => {
   }
 };
 
+const resetModal = () => {
+  // Reset input values
+  inputValue1.value = '';
+  inputValue.value = '';
+  updateButtonState();
+}
+
 const searchValidation = () => {
   const stateInput = inputValue1.value;
   const cityInput = inputValue.value.trim();
@@ -154,9 +161,7 @@ const searchValidation = () => {
   fetchLocationData();
 
   // Reset input values
-  inputValue1.value = '';
-  inputValue.value = '';
-
+  resetModal();
 };
 
 // getGeoLocation collects users current coordinates and uses the lat and long to gather station locations

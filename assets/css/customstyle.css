@@ -53,6 +53,10 @@
   margin-bottom: 20px;
 }
 
+#submitBtn.is-dark {
+  color: white;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
