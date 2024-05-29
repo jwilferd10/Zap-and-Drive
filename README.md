@@ -4,7 +4,7 @@
 
 :computer: **Github Repository**: https://github.com/jwilferd10/Zap-and-Drive
 
-:computer: **Live Customized Example**: https://arlontuazon.github.io/ZapDrive/ 
+:computer: **Live Example**: https://jwilferd10.github.io/Zap-and-Drive/
 
 ## :open_file_folder: Table of Contents:
   - [Preview](#camera-preview)
@@ -42,7 +42,7 @@ Zap & Drive is an application that allows users to search for EV Charging statio
 
 ## :paperclip: Contributors
  - Arlon Tuazon (API Selection & Base JavaScript Setup)
- - Jonathan Wilferd (Front-End Design, Logo Design, Assisted JavaScript Development)
+ - Jonathan Wilferd (Front-End Design, Logo Design, JavaScript Development)
   
 ## :e-mail: Contact Information:
 (Coming Soon!)
