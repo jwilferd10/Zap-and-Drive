@@ -144,15 +144,19 @@ const resetModal = () => {
 
 // Check if the key pressed is 'Enter'
 const handleKeyDown = (event) => {
-  if (event.key === 'Enter') {
+  const cityInputValue = inputValue.value.trim()
+
+  if (cityInputValue == '') {
+    return;
+  } else if (cityInputValue !== '' && event.key === 'Enter') {
     // Run the search method and reset the modal
     searchValidation();
     resetModal();
 
     // Deactivate the modal status
     modalElement.classList.remove('is-active');
-  }
-}
+  };
+};
 
 const searchValidation = () => {
   const stateInput = inputValue1.value;
