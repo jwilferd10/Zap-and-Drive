@@ -10,6 +10,7 @@ const inputValue1 = document.querySelector('#inputValue1');
 const mapContainer = document.getElementById("mapID");
 const markerButton = document.querySelector('#delMark');
 const addressListWrapper = document.querySelector('.address-list-wrapper');
+const modalElement = document.getElementById('modal-popup');
 
 // Set markers to initially be an empty array
 let markers = [];
@@ -139,6 +140,18 @@ const resetModal = () => {
   inputValue1.value = '';
   inputValue.value = '';
   updateButtonState();
+}
+
+// Check if the key pressed is 'Enter'
+const handleKeyDown = (event) => {
+  if (event.key === 'Enter') {
+    // Run the search method and reset the modal
+    searchValidation();
+    resetModal();
+
+    // Deactivate the modal status
+    modalElement.classList.remove('is-active');
+  }
 }
 
 const searchValidation = () => {
