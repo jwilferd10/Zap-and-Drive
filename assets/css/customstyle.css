@@ -101,8 +101,7 @@
 
 @media screen and (max-width: 480px) {
   .mapbox {
-      width: 250x;
-      height: 250px;
-      
+    width: 250x;
+    height: 250px;
   }
 }
