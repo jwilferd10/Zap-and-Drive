@@ -41,7 +41,6 @@
 #clickItems {
   margin-bottom: .5rem;
   margin-left: 20px;
-  width: 260px;
   background-color: hsl(221deg 11.81% 21.96%);
 }
 
@@ -97,12 +96,6 @@
   0% {opacity: 0}
   50% {opacity: 1}
   100% {opacity: 0}
-}
-
-@media screen and (max-width: 1023px) {
-  #clickItems {
-    width: unset;
-  }
 }
 
 @media screen and (max-width: 480px) {
