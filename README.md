@@ -20,7 +20,11 @@
 ![GitHub Logo](./img/webScreenshot.png)
 
 ## :wave: Description: 
-Zap & Drive is an application that allows users to search for EV Charging stations across the United States.
+### :zap: Locate, Navigate, and Charge
+
+Did you know that the United States is actively promoting the adoption of EVs as part of its broader strategy to combat climate change and reduce greenhouse gas emissions? An ambitious goal has been set for EVs to account for 50% of new vehicle sales by 2030. 
+
+As electric cars continue to gain traction within the United States, the need for convenient EV charging stations has never been greater. Zap and Drive is here to help you with that.
 
 ## :book: User Story:
 (Coming Soon!)
@@ -34,11 +38,16 @@ Zap & Drive is an application that allows users to search for EV Charging statio
 - openchargeMap (For EV charger locations)
 - leaflet.js and openstreetmap (Utilizing the map)
 
-## :minidisc: Getting Started:
-(Coming Soon!)
+## :minidisc: Usage:
+Locating charging stations is a simple and straightforward process.
+- Searches are currently limited to US states
+- Fields marked with an asterisk (*) are required
+- For most accurate results, please include a state in your search criteria
+- Clearing markers will also reset the map.
 
-### Usage
-(Coming Soon!)
+Additional Notes:
+- When a search is successful, this will automatically clear the map
+- Notifications under the map may help guide users
 
 ## :paperclip: Contributors
  - Arlon Tuazon (API Selection & Base JavaScript Setup)
