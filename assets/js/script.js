@@ -283,7 +283,7 @@ const populateMapWithChargeStations = (data) => {
         createMarker([Latitude, Longitude], text);
 
         // Append an HTML list item containing the address to the 'addressList' string
-        addressList += `<li class="cityVal" data-index="${index}">${AddressLine1}</li>`;
+        addressList += `<li class="cityVal m-1 pl-2 is-uppercase" data-index="${index}">${AddressLine1}</li>`;
       };
     });
 

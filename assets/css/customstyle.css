@@ -9,6 +9,10 @@
   margin: 10px 0;
 }
 
+.cityVal {
+  list-style-type: none;
+}
+
 .cityVal:hover {
   background: rgb(72, 71, 71);
   cursor: pointer;
