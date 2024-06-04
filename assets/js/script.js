@@ -264,6 +264,8 @@ const getChargeStation = async (latitude, longitude) => {
 
 const populateMapWithChargeStations = (data) => {
   try {
+    chargeStationData = data; 
+
     // Set addressList to an empty string
     let addressList = "";
 
@@ -281,17 +283,28 @@ const populateMapWithChargeStations = (data) => {
         createMarker([Latitude, Longitude], text);
 
         // Append an HTML list item containing the address to the 'addressList' string
-        addressList += `<li class="cityVal" data-index=${index}">${AddressLine1}</li>`;
+        addressList += `<li class="cityVal" data-index="${index}">${AddressLine1}</li>`;
       };
     });
 
-      // Populating wrapper with collected list items
-      addressListWrapper.innerHTML = addressList;
+    // Populating wrapper with collected list items
+    addressListWrapper.innerHTML = addressList;
 
     // Add click event listeners to each address item
     document.querySelectorAll('.cityVal').forEach(address => {
       address.addEventListener('click', (event) => {
-        console.log('Ive been clicked');
+        const index = event.target.getAttribute('data-index');
+        console.log(`Clicked address index: ${index}`);
+
+        const station = chargeStationData[index];
+        console.log(`Station data:`, station);
+
+        if (station) {
+          moveToStation(station);
+          console.log('Ive been clicked');
+        } else {
+          console.log( `No station data found for index: ${index}`);
+        }
       });
     });
 
@@ -301,6 +314,20 @@ const populateMapWithChargeStations = (data) => {
     console.log('An error has occurred when handling charge station data:', error)
   }
 };
+
+const moveToStation = (station) => {
+  const { Latitude, Longitude, AddressLine1, AccessComments } = station.AddressInfo;
+
+  // Move the map to the selected address
+  mymap.flyTo([Latitude, Longitude], 15);
+
+  // Open the station details
+  const popupText = `Address is: ${AddressLine1}, Hours: ${AccessComments || 'Not Found'}`;
+  L.popup()
+    .setLatLng([Latitude, Longitude])
+    .setContent(popupText)
+    .openOn(mymap);
+}
 
 updateButtonState();
 
