@@ -294,14 +294,10 @@ const populateMapWithChargeStations = (data) => {
     document.querySelectorAll('.cityVal').forEach(address => {
       address.addEventListener('click', (event) => {
         const index = event.target.getAttribute('data-index');
-        console.log(`Clicked address index: ${index}`);
-
         const station = chargeStationData[index];
-        console.log(`Station data:`, station);
 
         if (station) {
           moveToStation(station);
-          console.log('Ive been clicked');
         } else {
           console.log( `No station data found for index: ${index}`);
         }
