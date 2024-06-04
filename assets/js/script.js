@@ -14,6 +14,7 @@ const modalElement = document.getElementById('modal-popup');
 
 // Set markers to initially be an empty array
 let markers = [];
+let chargeStationData = [];
 
 // notificationMessage accepts two arguments, message and style.
 const notificationMessage = (message, styles) => {
@@ -250,11 +251,11 @@ const getChargeStation = async (latitude, longitude) => {
     }
 
     // Extract the data collected from the response
-    const data = await response.json();
+    const chargeStationData = await response.json();
 
     // Pass the collected data to populateMapWithChargeStations to process results
     notificationMessage('Search Successful!', {color: 'hsl(0, 0%, 100%))', backgroundColor: 'hsl(141, 71%, 48%)'});
-    populateMapWithChargeStations(data);
+    populateMapWithChargeStations(chargeStationData);
   } catch(error) {
     // Handle any errors
     console.log('Error in getChargeStations:', error);
@@ -267,7 +268,7 @@ const populateMapWithChargeStations = (data) => {
     let addressList = "";
 
     // Loop through each element in the 'data' array
-    data.forEach(element => {
+    data.forEach((element, index) => {
       // Destructure relevant properties from 'AddressInfo' object
       const { Latitude, Longitude, AddressLine1, AccessComments } = element.AddressInfo;
       
@@ -280,12 +281,19 @@ const populateMapWithChargeStations = (data) => {
         createMarker([Latitude, Longitude], text);
 
         // Append an HTML list item containing the address to the 'addressList' string
-        addressList += `<li class="cityVal">${AddressLine1}</li>`;
+        addressList += `<li class="cityVal" data-index=${index}">${AddressLine1}</li>`;
       };
     });
 
-    // Populating wrapper with collected list items
-    addressListWrapper.innerHTML = addressList;
+      // Populating wrapper with collected list items
+      addressListWrapper.innerHTML = addressList;
+
+    // Add click event listeners to each address item
+    document.querySelectorAll('.cityVal').forEach(address => {
+      address.addEventListener('click', (event) => {
+        console.log('Ive been clicked');
+      });
+    });
 
     console.log(markers);
   } catch (error) {
