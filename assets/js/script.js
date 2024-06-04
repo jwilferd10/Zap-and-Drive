@@ -293,12 +293,17 @@ const populateMapWithChargeStations = (data) => {
     // Add click event listeners to each address item
     document.querySelectorAll('.cityVal').forEach(address => {
       address.addEventListener('click', (event) => {
+        // Collect the index of the clicked 'address' based on the data-index attribute
         const index = event.target.getAttribute('data-index');
+
+        // Gather 'station' data from the index from chargeStationData
         const station = chargeStationData[index];
 
         if (station) {
+          // If station data is found, move the map to the station
           moveToStation(station);
         } else {
+          // Error log if nothing is found for the index.
           console.log( `No station data found for index: ${index}`);
         }
       });
@@ -311,19 +316,32 @@ const populateMapWithChargeStations = (data) => {
   }
 };
 
+// Function that locates and moves to a selected station and displays its details
 const moveToStation = (station) => {
-  const { Latitude, Longitude, AddressLine1, AccessComments } = station.AddressInfo;
+  const { Latitude, Longitude } = station.AddressInfo;
 
   // Move the map to the selected address
   mymap.flyTo([Latitude, Longitude], 15);
 
-  // Open the station details
-  const popupText = `Address is: ${AddressLine1}, Hours: ${AccessComments || 'Not Found'}`;
-  L.popup()
-    .setLatLng([Latitude, Longitude])
-    .setContent(popupText)
-    .openOn(mymap);
-}
+  // Find a marker in the 'markers' array based on its latitude and longitude coordinates
+  // The 'find' method iterates over each marker in the array and returns the first marker that satisfies conditions
+  // 'm.getLatLng()' retrieves the latitude and longitude of the current marker being evaluated
+  // Both lat and lng are then checked if it matches the assigned Latitude and Longitude
+  // If a matching marker is found, it is assigned to the 'marker' variable
+  const marker = markers.find(m => m.getLatLng().lat === Latitude && m.getLatLng().lng === Longitude);
+
+  // If markers exist
+  if (marker) {
+    // Set timed response to open station details
+    setTimeout(() => {
+      // leaflet.js method
+      marker.openPopup();
+    }, 300);
+  } else {
+    // Log errors
+    console.error('No marker found at the coordinates!');
+  }
+};
 
 updateButtonState();
 
