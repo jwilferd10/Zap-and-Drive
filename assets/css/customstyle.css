@@ -11,12 +11,18 @@
 
 .cityVal {
   list-style-type: none;
+  border-radius: 20px;
 }
 
 .cityVal:hover {
   background: rgb(72, 71, 71);
   cursor: pointer;
 } 
+
+.cityVal:active {
+  background: rgb(214, 210, 210);
+  color: rgb(72, 71, 71);
+}
 
 #search-container {
   background-color: hsl(221deg 8.67% 14.63%);
