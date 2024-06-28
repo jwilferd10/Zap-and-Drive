@@ -49,30 +49,39 @@
         <!-- Form & Map Section -->
         <section id="search-container" class="section box">
             <!-- Search and clear marker buttons -->
-            <div class="container pb-2 bottom-border" id="startSearch"> 
+            <header class="container pb-2 bottom-border" id="startSearch"> 
                 <h1 class ="title">Locate Nearby Charging Stations</h1>
-                <button class="button is-primary js-modal-trigger" data-target="modal-popup"><i class="fas fa-search pr-2"></i> Search</button>
-                <button class="button is-danger" id="delMark"><i class="fas fa-trash-alt pr-2"></i> Clear Markers</button>
-            </div>
+                <!-- Search Button (Toggles Modal) -->
+                <button class="button is-primary js-modal-trigger" data-target="modal-popup">
+                    <i class="fas fa-search pr-2"></i> 
+                    Search
+                </button>
+                <!-- Clear Markers (Resets & Clears Map) -->
+                <button class="button is-danger" id="delMark">
+                    <i class="fas fa-trash-alt pr-2"></i> 
+                    Clear Markers
+                </button>
+            </header>
            
 
-            <div class="columns is-multiline">
+            <article class="columns is-multiline">
                 <!-- OpenStreetMap -->
-                <div class="column is-two-quarters-desktop is-two-thirds-tablet is-full-mobile">
+                <section class="column is-two-quarters-desktop is-two-thirds-tablet is-full-mobile">
                     <div id="mapID" class="custom-box-shadow-1"></div>
-                </div>
+                </section>
 
                 <!-- Address List -->
-                <div class="column is-two-quarter-desktop is-one-third-tablet is-full-mobile">
+                <aside class="column is-two-quarter-desktop is-one-third-tablet is-full-mobile">
                     <h4 id="address-header" class="title is-4 has-text-centered pb-2"> Address List </h4>
                     <!-- Nearby charging stations list -->
-                    <div class="box address-list-wrapper" id ="clickItems">
+                    <section class="box address-list-wrapper" id ="clickItems">
                         <!-- Data collected for addressList will populate here -->
-                    </div>
-                </div>         
-            </div>
+                    </section>
+                </aside>         
+            </article>
 
-            <div class="notification"></div>
+            <!-- Notifies Current App Actions -->
+            <section class="notification"></section>
         </section>  
     </main>
 
