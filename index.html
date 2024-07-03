@@ -87,8 +87,11 @@
 
     <!-- Pop-up modal for search functionality -->
     <section id="modal-popup" class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
+        <!-- Adjusts the background color -->
+        <aside class="modal-background"></aside>
+
+        <!-- Modal -->
+        <section class="modal-card">
             <!-- Modal Header -->
             <header class="modal-card-head">
                 <p class="modal-card-title"><i class="fas fa-map-marked-alt pr-1"></i> Search An Area</p>
@@ -96,21 +99,19 @@
             </header>
 
             <!-- Modal Body -->
-            <div class="modal-card-body">
-                <div class="is-2" id="citySearch"> 
+            <form class="modal-card-body">
+                <fieldset class="is-2" id="citySearch"> 
                     <!-- Start of fetching data -->
-                    <label class="label content is-large pb-1">Enter Desired Location</label>
-                    <div class="field m-3 p-3">
+                    <legend class="label content is-large pb-1">Enter Desired Location</legend>
+                    <section class="field m-3 p-3">
                         <label class="label content is-medium"><i class="fas fa-city pr-1"></i> City *</label>
-                        <div class="control">
-                            <input id="inputValue" class="input is-rounded is-medium" onkeydown="handleKeyDown(event)" type="text" placeholder="Enter a City...">
-                        </div>
-                    </div>
+                        <input id="inputValue" class="control input is-rounded is-medium" onkeydown="handleKeyDown(event)" type="text" placeholder="Enter a City...">
+                    </section>
 
                     <!-- State entry and dropdown menu -->
-                    <div class="field m-3 p-3">
-                        <label class="label content is-medium"><i class="fas fa-flag-usa pr-1"></i> State</label>
-                        <div class="select is-medium is-rounded">
+                    <section class="field m-3 p-3">
+                        <legend class="label content is-medium"><i class="fas fa-flag-usa pr-1"></i> State</legend>
+                        <section class="select is-medium is-rounded">
                             <select id="inputValue1" name="state">
                                 <option value="">Select a State...</option>
                                 <option value="AL">Alabama</option>
@@ -165,20 +166,18 @@
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                             </select>
-                        </div>
-                    </div>
-                </div>    
-            </div>
+                        </section>
+                    </section>
+                </fieldset>    
+            </form>
 
             <!-- Modal Footer -->
-            <footer class="modal-card-foot">
-                <div class="buttons">
-                    <button id="submitBtn" class="button is-success is-dark" disabled><i class="fas fa-search pr-2"></i>Search</button>
-                    <button class="button is-info" id="searchEV"><i class="fas fa-map-pin pr-2"></i>Search Immediate Location</button> 
-                    <button class="button is-danger"><i class="fas fa-times-circle pr-1"></i> Cancel</button>
-                </div>
+            <footer class="modal-card-foot buttons">
+                <button id="submitBtn" class="button is-success is-dark" disabled><i class="fas fa-search pr-2"></i>Search</button>
+                <button class="button is-info" id="searchEV"><i class="fas fa-map-pin pr-2"></i>Search Immediate Location</button> 
+                <button class="button is-danger"><i class="fas fa-times-circle pr-1"></i> Cancel</button>
             </footer>
-        </div>
+        </section>
     </section>
 
     <!-- Footer -->
