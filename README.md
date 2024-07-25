@@ -48,7 +48,17 @@ Our future plans for this project include:
 So much for viewing Zap and Drive, we hope this application can be useful in any way possible. Thank you again, happy coding! 
 
 ## :book: User Story:
-(Coming Soon!)
+AS AN owner of an electric vehicle I WANT an application that highlights local charging stations SO THAT I can plan my routes.
+
+GIVEN an EV Charging Station Application 
+- WHEN I launch Zap & Drive
+  - THEN I expect a landing page with the instructions and a search form
+- WHEN I search a location
+  - THEN I am brought to that location on the map and presented with visual icons
+- WHEN I click on an address
+  - THEN I am brought to that direct location and am presented with details on the specific charging locations
+- WHEN I select 'Clear Markers'
+    - THEN I am brought back to the United States map and my markers are cleared.
 
 ## :floppy_disk: Resources Used:
 - HTML
