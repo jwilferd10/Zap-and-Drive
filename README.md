@@ -12,8 +12,8 @@
   - [Description](#wave-description)
   - [User Story](#book-user-story)
   - [Resources Used](#floppy_disk-resources-used)
-  - [Contributors](#paperclip-contributors)
   - [Getting Started](#minidisc-getting-started)
+  - [Contributors](#paperclip-contributors)
   - [Contact Information](#e-mail-contact-information)
 
 ## :camera: Preview:
@@ -38,15 +38,28 @@ As electric cars continue to gain traction within the United States, the need fo
   - When clicked, presents users with information about the charging station
  
 ### 💭 Developer Notes:
-Future plans for this project include:
+Zap & Drive is a project that's recently undergone an extensive facelift. Much of the previous code has been refactored and updated to follow more modern and best practices.
+
+Our future plans for this project include:
 - Auto-completing potential states a city-name is located in
 - Save addresses on a list and allowing users to populate the map with saved addresses
+- Create a page showcasing snapshots of the previous versions of this app.
 
 ### 🙏 Thank You!
 So much for viewing Zap and Drive, we hope this application can be useful in any way possible. Thank you again, happy coding! 
 
 ## :book: User Story:
-(Coming Soon!)
+AS AN owner of an electric vehicle I WANT an application that highlights local charging stations SO THAT I can plan my routes.
+
+GIVEN an EV Charging Station Application 
+- WHEN I launch Zap & Drive
+  - THEN I expect a landing page with the instructions and a search form
+- WHEN I search a location
+  - THEN I am brought to that location on the map and presented with visual icons
+- WHEN I click on an address
+  - THEN I am brought to that direct location and am presented with details on the specific charging locations
+- WHEN I select 'Clear Markers'
+    - THEN I am brought back to the United States map and my markers are cleared.
 
 ## :floppy_disk: Resources Used:
 - HTML
@@ -69,8 +82,8 @@ Additional Notes:
 - Notifications under the map may help guide users
 
 ## :paperclip: Contributors
- - Arlon Tuazon (API Selection and Implementation, Base JS Configuration, JS Development)
- - Jonathan Wilferd (Front-End and Logo design, JS Development)
-  
+ - Arlon Tuazon (API Selection and Implementation, Baseline JavaScript Development)
+ - Jonathan Wilferd (Front-End and Logo design, JavaScript Development)
+
 ## :e-mail: Contact Information:
 - ### [jwilferd10](https://github.com/jwilferd10)
