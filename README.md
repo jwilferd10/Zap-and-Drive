@@ -17,7 +17,7 @@
   - [Contact Information](#e-mail-contact-information)
 
 ## :camera: Preview:
-![GitHub Logo](./img/webScreenshot.png)
+<img src="img/ZapDriveDesktop.jpg" alt="Image showcasing Zap and Drive's Desktop appearance."/>
 
 ## :wave: Description: 
 ### :zap: Locate, Navigate, and Charge
@@ -73,4 +73,4 @@ Additional Notes:
  - Jonathan Wilferd (Front-End and Logo design, JS Development)
   
 ## :e-mail: Contact Information:
-(Coming Soon!)
+- ### [jwilferd10](https://github.com/jwilferd10)
